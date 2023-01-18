@@ -14,6 +14,8 @@ const LoginMethods = (props:LoginMethodsProps) => {
 	return (
 		<div className="flex flex-col justify-center items-center gap-3">
 			{props.providers && Object.values(props.providers).map((provider) => (
+				<>
+				<div>Hello world</div>
 				<div className=""key={provider.name}>
 					<Button size="lg" bordered color="secondary" onClick={() => signIn(provider.id)}>
 						<Image src={`/${provider.name}.png`} alt="hello" width={30} height={30}></Image>
@@ -22,6 +24,7 @@ const LoginMethods = (props:LoginMethodsProps) => {
 					</Button>
 					
 				</div>
+				</>
 			))}
 		</div>
 	)
