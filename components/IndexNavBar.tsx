@@ -35,9 +35,9 @@ const IndexNavBar = (props:IndexNavBarProps) => {
 				<Link href="#" legacyBehavior>
 					<a className="text-black">Sign Up</a>
 				</Link>
-				<Button size="lg" auto flat css={{background:'$brandPurple',color:'white'}} onPress={handler}>
+				<button onClick={handler} className="bg-[#C36CEC] text-white border-none py-2 px-5 rounded-xl font-semibold cursor-pointer hover:bg-[#AF61D4]">
 					Login
-				</Button>
+				</button>
 				<Modal
 					blur
 					scroll
