@@ -10,6 +10,7 @@ interface HomeProps{
 	providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null
 }
 const Home = ({providers}:HomeProps) => {
+  console.log(providers)
   return (
     <>
       <Head>
