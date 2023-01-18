@@ -11,12 +11,11 @@ interface LoginMethodsProps{
 	providers:Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null
 }
 const LoginMethods = (props:LoginMethodsProps) => {
-	console.log(props.providers)
+	// console.log(props.providers)
 	return (
 		<div className="flex flex-col justify-center items-center gap-3">
 			{props.providers && Object.values(props.providers).map((provider) => (
 				<>
-				<div>Hello world</div>
 				<div className=""key={provider.name}>
 					<Button size="lg" bordered color="secondary" onClick={() => signIn(provider.id)}>
 						<Image src={`/${provider.name}.png`} alt="hello" width={30} height={30}></Image>
