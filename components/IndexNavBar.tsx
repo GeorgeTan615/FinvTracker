@@ -1,10 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { Button } from '@nextui-org/react';
 
 const IndexNavBar = () => {
 	return (
 		<nav className="flex justify-between pl-10 pr-10">
+			<Button>Click me</Button>
 			<Link href="/">
 				<img
 					src="https://png.pngtree.com/png-clipart/20190903/original/pngtree-financial-icon-png-image_4420727.jpg"
