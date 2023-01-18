@@ -1,12 +1,25 @@
 import React from "react";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Button } from '@nextui-org/react';
+import { Modal, Button, Text, Input, Row, Checkbox } from "@nextui-org/react";
+import LoginMethods from "./LoginMethods";
+import { LiteralUnion } from "next-auth/react"
+import { BuiltInProviderType } from "next-auth/providers"
+import { ClientSafeProvider } from "next-auth/react"
 
-const IndexNavBar = () => {
+interface IndexNavBarProps{
+	providers:Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null
+}
+const IndexNavBar = (props:IndexNavBarProps) => {
+	const [visible, setVisible] = React.useState(false);
+	const handler = () => setVisible(true);
+  
+	const closeHandler = () => {
+	  setVisible(false);
+	  console.log("closed");
+	};
 	return (
 		<nav className="flex justify-between pl-10 pr-10">
-			<Button>Click me</Button>
 			<Link href="/">
 				<img
 					src="https://png.pngtree.com/png-clipart/20190903/original/pngtree-financial-icon-png-image_4420727.jpg"
@@ -16,27 +29,39 @@ const IndexNavBar = () => {
 				/>
 			</Link>
 			<div className="flex justify-center gap-10 text-lg font-semibold items-center">
-				<Link href="#" legacyBehavior>
-					<a>About</a>
+				<Link href="signin" legacyBehavior>
+					<a className="text-black">About</a>
 				</Link>
 				<Link href="#" legacyBehavior>
-					<a>Sign Up</a>
+					<a className="text-black">Sign Up</a>
 				</Link>
-				<Link href="#" legacyBehavior>
-					<a
-						href={`/api/auth/signin`}
-						onClick={(e) => {
-							e.preventDefault()
-							signIn()
-						  }}
-						className="bg-[#C36CEC] py-2 px-4 text-white rounded-lg"
-					>
-						Login
-					</a>
-				</Link>
+				<Button size="lg" auto flat css={{background:'$brandPurple',color:'white'}} onPress={handler}>
+					Login
+				</Button>
+				<Modal
+					blur
+					scroll
+					closeButton
+					aria-labelledby="modal-title"
+					open={visible}
+					onClose={closeHandler}
+				>
+					<Modal.Header>
+						<Text b id="modal-title" size={30}>
+							Login
+						</Text>
+					</Modal.Header>
+					<Modal.Body>
+						<LoginMethods providers={props.providers}/>
+					</Modal.Body>
+					<Modal.Footer justify="center">
+						<Button auto flat css={{background:'$brandPurple',color:'white'}} onPress={closeHandler}>
+							Close
+						</Button>
+					</Modal.Footer>
+				</Modal>
 			</div>
 		</nav>
-	);
-};
+)};
 
 export default IndexNavBar;
