@@ -48,11 +48,13 @@ const IndexNavBar = (props:IndexNavBarProps) => {
 				>
 					<Modal.Header>
 						<Text b id="modal-title" size={30}>
-							Login
+							Sign in
 						</Text>
 					</Modal.Header>
 					<Modal.Body>
+						<hr/>
 						<LoginMethods providers={props.providers}/>
+						<hr/>
 					</Modal.Body>
 					<Modal.Footer justify="center">
 						<Button auto flat css={{background:'$brandPurple',color:'white'}} onPress={closeHandler}>
