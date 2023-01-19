@@ -12,19 +12,19 @@ interface LoginMethodsProps{
 }
 const LoginMethods = (props:LoginMethodsProps) => {
 	// Temp Solution. Next time can opt for Amazon s3 to store our images
-	const google = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png"
-	const github = "https://cdn-icons-png.flaticon.com/512/25/25231.png"
+	// const google = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png"
+	// const github = "https://cdn-icons-png.flaticon.com/512/25/25231.png"
 	return (
 		<div className="flex flex-col justify-center items-center gap-3">
 			{props.providers && Object.values(props.providers).map((provider) => {
-				let link = provider.name ==	 'Google' ? google : github;
+				// let link = provider.name ==	 'Google' ? google : github;
 				return (
 					<>
 					<div key={provider.name}>
 						<Button size="lg" bordered color="secondary" onClick={() => signIn(provider.id)}>
-							<Image src="/googlelogo.svg" alt={`${provider.name} logo`} fill></Image>
+							<Image src={`/${provider.name}.svg`} alt={`${provider.name} logo`} fill></Image>
 							<div className="p-1"></div>
-							{/* Sign in with {provider.name} */}
+							Sign in with {provider.name}
 						</Button>
 						
 					</div>
