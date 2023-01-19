@@ -20,11 +20,11 @@ const LoginMethods = (props:LoginMethodsProps) => {
 				let link = provider.name ==	 'Google' ? google : github;
 				return (
 					<>
-					<div className=""key={provider.name}>
+					<div key={provider.name}>
 						<Button size="lg" bordered color="secondary" onClick={() => signIn(provider.id)}>
-							<Image src={link} alt={`${provider.name} logo`} width={30} height={30}></Image>
+							<Image src="/googlelogo.svg" alt={`${provider.name} logo`} fill></Image>
 							<div className="p-1"></div>
-							Sign in with {provider.name}
+							{/* Sign in with {provider.name} */}
 						</Button>
 						
 					</div>
