@@ -1,6 +1,6 @@
 import React from 'react'
 
-const IndexFooter = () => {
+const HomeFooter = () => {
   return (
 	<footer className="self-center">
 		<a className = "font-sm text-[#C36CEC]" href="https://github.com/GeorgeTan615">GitHub</a>
@@ -9,4 +9,4 @@ const IndexFooter = () => {
   )
 }
 
-export default IndexFooter
+export default HomeFooter

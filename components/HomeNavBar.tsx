@@ -1,22 +1,20 @@
 import React from "react";
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { Modal, Button, Text, Input, Row, Checkbox } from "@nextui-org/react";
+import { Modal, Button, Text, } from "@nextui-org/react";
 import LoginMethods from "./LoginMethods";
 import { LiteralUnion } from "next-auth/react"
 import { BuiltInProviderType } from "next-auth/providers"
 import { ClientSafeProvider } from "next-auth/react"
 
-interface IndexNavBarProps{
+interface HomeNavBarProps{
 	providers:Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null
 }
-const IndexNavBar = (props:IndexNavBarProps) => {
+const HomeNavBar = (props:HomeNavBarProps) => {
 	const [visible, setVisible] = React.useState(false);
 	const handler = () => setVisible(true);
   
 	const closeHandler = () => {
 	  setVisible(false);
-	  console.log("closed");
 	};
 	return (
 		<nav className="flex justify-between pl-10 pr-10">
@@ -29,7 +27,7 @@ const IndexNavBar = (props:IndexNavBarProps) => {
 				/>
 			</Link>
 			<div className="flex justify-center gap-10 text-lg font-semibold items-center">
-				<Link href="signin" legacyBehavior>
+				<Link href="#" legacyBehavior>
 					<a className="text-black">About</a>
 				</Link>
 				<Link href="#" legacyBehavior>
@@ -66,4 +64,4 @@ const IndexNavBar = (props:IndexNavBarProps) => {
 		</nav>
 )};
 
-export default IndexNavBar;
+export default HomeNavBar;
