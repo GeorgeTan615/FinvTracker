@@ -39,7 +39,7 @@ const LoginMethods = (props: LoginMethodsProps) => {
 								>
 									<img
 										className="w-full h-full"
-										src={`/${provider.name}.svg`}
+										src={`/${provider.name}2.svg`}
 										alt={`${provider.name} logo`}
 									></img>
 									&nbsp;{provider.name}
