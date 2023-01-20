@@ -13,10 +13,9 @@ const HomeLayout = (props:HomeLayoutProps) => {
   return (
 	<div className="p-5 flex flex-col justify-between h-screen content-center">
 		<HomeNavBar providers={props.providers}/>
-		<div>
+		<div className="">
 			{props.children}
 		</div>
-		
 		<HomeFooter/>
 	</div>
   )

@@ -3,12 +3,14 @@ import Link from "next/link";
 import { MdDarkMode, MdOutlineLightMode } from 'react-icons/md';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { User } from "@nextui-org/react";
 
 const AppNavBar = () => {
 	const [isLightMode, setIsLightMode] = useState<boolean>(false);
 	const router = useRouter();
+	const activeTabStyle = "bg-[#C36CEC] text-white border-none py-2 px-5 rounded-3xl font-semibold hover:bg-[#AF61D4]"
+	const notActiveTabStyle = "text-black font-semibold py-2 px-5 hover:bg-[#E8DEFF] hover:rounded-3xl"
 	console.log(router.pathname)
+	console.log(router.pathname==="/incomespendings")
 	return (
 		<nav className="grid grid-cols-3 auto-rows-max">
 			<Link className="justify-self-start flex flex-start" href="/">
@@ -18,17 +20,16 @@ const AppNavBar = () => {
 					width={50}
 					height={50}
 				/>
-				<p>FinvTracker</p>
 			</Link>
-			<div className="justify-self-center flex justify-between gap-10 text-lg font-semibold items-center">
+			<div className="flex justify-evenly text-lg gap-5 font-semibold items-center">
 				<Link href="/overview" legacyBehavior>
-					<a className="text-black">Overview</a>
+					<a className={router.pathname === "/overview" ? activeTabStyle : notActiveTabStyle }>Overview</a>
 				</Link>
 				<Link href="/incomespendings" legacyBehavior>
-					<a className="text-black">Income/Spendings</a>
+					<a className={router.pathname === "/incomespendings" ? activeTabStyle : notActiveTabStyle }>Income/Spendings</a>
 				</Link>
 				<Link href="/investments" legacyBehavior>
-					<a className="text-black">Investments</a>
+					<a className={router.pathname === "/investments" ? activeTabStyle : notActiveTabStyle }>Investments</a>
 				</Link>
 
 			</div>
