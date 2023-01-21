@@ -7,9 +7,9 @@ interface AppLayoutProps{
 
 const AppLayout = (props:AppLayoutProps) => {
   return (
-	<div className="p-5 flex flex-col h-screen content-center">
+	<div className="flex flex-col h-screen content-center">
 		<AppNavBar />
-		<div className="">
+		<div className="bg-[#F3F3F3] h-full">
 			{props.children}	
 		</div>
 		

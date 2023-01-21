@@ -4,14 +4,11 @@ import { unstable_getServerSession } from "next-auth/next"
 import { authOptions } from "./api/auth/[...nextauth]"
 import { useSession } from "next-auth/react"
 
-
 const Overview = () => {
 	const { data: session, status } = useSession();
-	
 	return (
 		<AppLayout>
-			{session?.user?.name}
-			<div>hello world</div>
+			<div></div>
 		</AppLayout>
 
 	)

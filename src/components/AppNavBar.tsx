@@ -8,17 +8,18 @@ import Profile from "./Profile";
 const AppNavBar = () => {
 	const [isLightMode, setIsLightMode] = useState<boolean>(false);
 	const router = useRouter();
-	const activeTabStyle = "bg-[#C36CEC] text-white border-none py-2 px-5 rounded-3xl font-semibold hover:bg-[#AF61D4]";
+	const activeTabStyle = "transition ease-in-out delay-100 duration-300 bg-[#C36CEC] text-white border-none py-2 px-5 rounded-3xl font-semibold hover:bg-[#AF61D4]";
 	const notActiveTabStyle = "transition ease-in-out delay-100 duration-300 text-black font-semibold py-2 px-5 hover:bg-[#E8DEFF] rounded-3xl";
 
 	return (
-		<nav className="grid grid-cols-3 auto-rows-max">
+		<nav className="p-5 grid grid-cols-3 auto-rows-max">
 			<Link className="justify-self-start flex flex-start" href="/overview">
 				<img
 					src="https://png.pngtree.com/png-clipart/20190903/original/pngtree-financial-icon-png-image_4420727.jpg"
 					alt="Logo"
 					width={50}
 					height={50}
+					className="scale-150"
 				/>
 			</Link>
 			<div className="flex justify-evenly text-lg gap-5 font-semibold items-center">
