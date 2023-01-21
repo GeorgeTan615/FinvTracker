@@ -1,11 +1,10 @@
 import React from "react";
-import { getProviders, signIn } from "next-auth/react";
-import { useState, useEffect } from "react";
+import { signIn } from "next-auth/react";
 import { LiteralUnion } from "next-auth/react";
 import { BuiltInProviderType } from "next-auth/providers";
 import { ClientSafeProvider } from "next-auth/react";
-import Image from "next/image";
 import { Button } from "@nextui-org/react";
+import { baseUrl } from "../configs/constants";
 
 interface LoginMethodsProps {
 	providers: Record<
@@ -14,6 +13,7 @@ interface LoginMethodsProps {
 	> | null;
 }
 const LoginMethods = (props: LoginMethodsProps) => {
+	const landingUrl = `${baseUrl}/overview`
 	return (
 		<div className="flex flex-col justify-center items-center gap-3">
 			{props.providers &&
@@ -35,7 +35,7 @@ const LoginMethods = (props: LoginMethodsProps) => {
 											border: '$gray500 solid',
 										  },
 									}}
-									onClick={() => signIn(provider.id)}
+									onClick={() => signIn(provider.id, { callbackUrl: landingUrl })}
 								>
 									<img
 										className="w-full h-full"

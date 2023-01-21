@@ -1,10 +1,13 @@
 import React from 'react'
-import HomeLayout from '@/components/HomeLayout'
+import HomeLayout from '../components/HomeLayout'
 import Head from 'next/head'
 import { getProviders } from 'next-auth/react'
 import { LiteralUnion } from "next-auth/react"
 import { BuiltInProviderType } from "next-auth/providers"
 import { ClientSafeProvider } from "next-auth/react"
+import { unstable_getServerSession } from "next-auth/next"
+import { authOptions } from "./api/auth/[...nextauth]"
+import { useSession } from "next-auth/react"
 
 interface HomeProps{
 	providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null
@@ -31,11 +34,26 @@ const Home = ({providers}:HomeProps) => {
   )
 }
 
-export async function getStaticProps(context:any) {
-  const providers = await getProviders()
-  return {
-    props: { providers },
-  }
+export async function getServerSideProps(context:any) {
+	const session = await unstable_getServerSession(context.req, context.res, authOptions)
+	if (session) {
+		return {
+		redirect: {
+		destination: '/overview',
+		permanent: false,
+		},
+		}
+	}
+	const providers = await getProviders()
+
+	return {
+		props: {
+		session,
+		providers
+		},
+	}
 }
 
 export default Home
+
+

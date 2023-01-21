@@ -13,7 +13,7 @@ const AppNavBar = () => {
 	console.log(router.pathname==="/incomespendings")
 	return (
 		<nav className="grid grid-cols-3 auto-rows-max">
-			<Link className="justify-self-start flex flex-start" href="/">
+			<Link className="justify-self-start flex flex-start" href="/overview">
 				<img
 					src="https://png.pngtree.com/png-clipart/20190903/original/pngtree-financial-icon-png-image_4420727.jpg"
 					alt="Logo"
