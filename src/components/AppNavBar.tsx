@@ -9,7 +9,7 @@ const AppNavBar = () => {
 	const [isLightMode, setIsLightMode] = useState<boolean>(false);
 	const router = useRouter();
 	const activeTabStyle = "bg-[#C36CEC] text-white border-none py-2 px-5 rounded-3xl font-semibold hover:bg-[#AF61D4]";
-	const notActiveTabStyle = "text-black font-semibold py-2 px-5 hover:bg-[#E8DEFF] hover:rounded-3xl";
+	const notActiveTabStyle = "transition ease-in-out delay-100 duration-300 text-black font-semibold py-2 px-5 hover:bg-[#E8DEFF] rounded-3xl";
 
 	return (
 		<nav className="grid grid-cols-3 auto-rows-max">

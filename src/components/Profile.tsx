@@ -15,14 +15,14 @@ const Profile = () => {
 		<>
 			{session && session.user?.image && session.user?.name && (
 				<Image
-					// className="rounded-full"
+					className="rounded-full cursor-pointer border-black hover:scale-150"
 					placeholder="blur"
 					src={session.user.image}
 					alt={session.user.name}
 					width={40}
 					height={40}
 					// style={{ borderRadius: "50%" }}
-					// onClick={handler}
+					onClick={handler}
 				/>
 			)}
 			<Modal
