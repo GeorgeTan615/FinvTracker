@@ -37,7 +37,6 @@ const HomeNavBar = (props:HomeNavBarProps) => {
 					Login
 				</button>
 				<Modal
-					blur
 					scroll
 					closeButton
 					aria-labelledby="modal-title"

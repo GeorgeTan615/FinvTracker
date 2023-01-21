@@ -38,18 +38,18 @@ export async function getServerSideProps(context:any) {
 	const session = await unstable_getServerSession(context.req, context.res, authOptions)
 	if (session) {
 		return {
-		redirect: {
-		destination: '/overview',
-		permanent: false,
-		},
+			redirect: {
+				destination: '/overview',
+				permanent: false,
+			},
 		}
 	}
 	const providers = await getProviders()
 
 	return {
 		props: {
-		session,
-		providers
+			session,
+			providers
 		},
 	}
 }
