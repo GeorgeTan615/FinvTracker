@@ -59,7 +59,7 @@ const Profile = () => {
 							}}
 						>
 							<FcSettings size={20}/>
-							<div>&nbsp;Settings</div>
+							&nbsp;&nbsp;Settings
 						</Button>
 						<Button
 							auto
@@ -78,7 +78,7 @@ const Profile = () => {
 							onClick={() => signOut()}
 						>
 							<FcGoogle size={20}/>
-							&nbsp;Sign Out
+							&nbsp;&nbsp;Sign Out
 						</Button>
 						</div>
 					<hr />
