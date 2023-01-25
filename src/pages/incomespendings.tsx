@@ -5,6 +5,7 @@ import { authOptions } from "./api/auth/[...nextauth]";
 import { useSession } from "next-auth/react";
 import Transactions from "../components/Transactions";
 import DonutChart from "../components/DonutChart";
+import { Input } from "@nextui-org/react";
 
 const IncomeSpendings = () => {
 	const { data: session, status } = useSession();
@@ -13,7 +14,19 @@ const IncomeSpendings = () => {
 		<AppLayout>
 			<div className="px-14 py-3 flex flex-col h-full">
 				<h1>Income/Spendings</h1>
-				<h5 className="self-end">Date Filter</h5>
+				<div className="self-end flex items-center gap-5 bg-white p-2 rounded-xl">
+					<Input 
+						width="186px" 
+						label="Start Date" 
+						type="date" 
+					/>
+					<p className="font-semibold">to</p>
+					<Input 
+						width="186px" 
+						label="End Date" 
+						type="date" 
+					/>
+				</div>
 				<div className="h-full grid grid-cols-7">
 					<Transactions />
 					{/* One for Spendings One for Income */}
