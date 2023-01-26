@@ -28,11 +28,13 @@ const Transactions = (props:Transactions) => {
 				<AddTransactionButton mutate={props.mutate}/>
 			</div>
 			<h5 className="underline">Jan 14, 2023 (Today)</h5>
+			<div className="flex flex-col justify-center items-center gap-3">
 			{
-				props.transactions && props.transactions.map((transaction)=>{
-					return <TransactionCard transaction={transaction} />
+				props.transactions && props.transactions.map((transaction,index)=>{
+					return <TransactionCard key={index} transaction={transaction} />
 				})
 			}
+			</div>
 		</div>
   )
 }
