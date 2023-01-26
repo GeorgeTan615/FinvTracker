@@ -8,7 +8,8 @@ export interface Transaction{
 	description:string,
 	amount:number,
 	createdAt:string,
-	userId:string
+	userId:string,
+	category:string,
 }
 
 interface Transactions{
@@ -16,6 +17,7 @@ interface Transactions{
 	mutate:UseMutateFunction<void, unknown, {
 		description: string;
 		amount: number;
+		category:string;
   }, unknown>
 }
 

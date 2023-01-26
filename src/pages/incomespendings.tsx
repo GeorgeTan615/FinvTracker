@@ -2,7 +2,6 @@ import React from "react";
 import AppLayout from "../components/AppLayout";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "./api/auth/[...nextauth]";
-import { useSession } from "next-auth/react";
 import Transactions from "../components/Transactions";
 import DonutChart from "../components/DonutChart";
 import { Input } from "@nextui-org/react";
@@ -10,64 +9,70 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import { baseUrl } from "../configs/constants";
 
 const IncomeSpendings = () => {
-	const { data: session, status } = useSession();
-	const qc = useQueryClient()
-
-	const fetchTransactions = async () =>{
-		const response = await fetch(`${baseUrl}/api/transactions`)
-		const data = await response.json()
+	const fetchTransactions = async () => {
+		const response = await fetch(`${baseUrl}/api/transactions`);
+		const data = await response.json();
 		return data;
-	}
-	const {isLoading,isError,data,refetch} = useQuery('getTransactions',fetchTransactions)
+	};
+	const { data, refetch } = useQuery("getTransactions", fetchTransactions);
 
-	const addTransaction = async ({description, amount}:{description: string, amount: number}) => {
+	const addTransaction = async ({
+		description,
+		amount,
+		category,
+	}: {
+		description: string;
+		amount: number;
+		category: string;
+	}) => {
 		const response = await fetch(`${baseUrl}/api/transactions`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ description, amount }),
+			body: JSON.stringify({ description, amount, category}),
 		});
 		const data = await response.json();
 		return data;
 	};
 
 	const { mutate } = useMutation(
-		async ({description,amount}:{description:string,amount:number}) => {
-			addTransaction({description, amount});
+		async ({
+			description,
+			amount,
+			category,
+		}: {
+			description: string;
+			amount: number;
+			category:string
+		}) => {
+			// Must await, so that after add transaction finishes, we will fire refetch
+			await addTransaction({ description, amount, category });
 		},
 		{
 			onSuccess: () => {
-				qc.invalidateQueries('getTransactions')
-				console.log('here')
+				refetch();
 			},
 		}
 	);
+
 	return (
 		<AppLayout>
 			<div className="px-14 py-3 flex flex-col h-full">
 				<h1>Income/Spendings</h1>
 				<div className="self-end flex items-center gap-5 bg-white p-2 rounded-xl">
-					<Input 
-						width="186px" 
-						label="Start Date" 
-						type="date" 
-					/>
+					<Input width="186px" label="Start Date" type="date" />
 					<p className="font-semibold">to</p>
-					<Input 
-						width="186px" 
-						label="End Date" 
-						type="date" 
-					/>
+					<Input width="186px" label="End Date" type="date" />
 				</div>
 				<div className="h-full grid grid-cols-7">
-					{!isLoading && <Transactions transactions={data.transactions} mutate={mutate}/>}
-					{/* <Transactions transactions={data.transactions}/> */}
+					{data && (
+						<Transactions transactions={data.transactions} mutate={mutate} />
+					)}
 					{/* One for Spendings One for Income */}
 					{/* <DonutChart />
 					<DonutChart  /> */}
 				</div>
-
 			</div>
 		</AppLayout>
 	);

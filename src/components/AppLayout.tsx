@@ -9,7 +9,7 @@ const AppLayout = (props:AppLayoutProps) => {
   return (
 	<div className="flex flex-col h-screen content-center">
 		<AppNavBar />
-		<div className="bg-[#F3F3F3] h-full">
+		<div className="bg-[#F3F3F3] h-full overflow-auto">
 			{props.children}	
 		</div>
 		
