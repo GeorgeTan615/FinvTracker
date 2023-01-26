@@ -6,10 +6,43 @@ import { useSession } from "next-auth/react";
 import Transactions from "../components/Transactions";
 import DonutChart from "../components/DonutChart";
 import { Input } from "@nextui-org/react";
+import { useQuery, useMutation, useQueryClient } from "react-query";
+import { baseUrl } from "../configs/constants";
 
 const IncomeSpendings = () => {
 	const { data: session, status } = useSession();
+	const qc = useQueryClient()
 
+	const fetchTransactions = async () =>{
+		const response = await fetch(`${baseUrl}/api/transactions`)
+		const data = await response.json()
+		return data;
+	}
+	const {isLoading,isError,data,refetch} = useQuery('getTransactions',fetchTransactions)
+
+	const addTransaction = async ({description, amount}:{description: string, amount: number}) => {
+		const response = await fetch(`${baseUrl}/api/transactions`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ description, amount }),
+		});
+		const data = await response.json();
+		return data;
+	};
+
+	const { mutate } = useMutation(
+		async ({description,amount}:{description:string,amount:number}) => {
+			addTransaction({description, amount});
+		},
+		{
+			onSuccess: () => {
+				qc.invalidateQueries('getTransactions')
+				console.log('here')
+			},
+		}
+	);
 	return (
 		<AppLayout>
 			<div className="px-14 py-3 flex flex-col h-full">
@@ -28,7 +61,8 @@ const IncomeSpendings = () => {
 					/>
 				</div>
 				<div className="h-full grid grid-cols-7">
-					<Transactions />
+					{!isLoading && <Transactions transactions={data.transactions} mutate={mutate}/>}
+					{/* <Transactions transactions={data.transactions}/> */}
 					{/* One for Spendings One for Income */}
 					{/* <DonutChart />
 					<DonutChart  /> */}

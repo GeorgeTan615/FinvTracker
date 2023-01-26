@@ -2,7 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { createTheme, NextUIProvider } from "@nextui-org/react"
 import { SessionProvider } from "next-auth/react"
-
+import { QueryClientProvider,QueryClient } from 'react-query'
 const theme = createTheme({
   type: "light", // it could be "light" or "dark"
   theme: {
@@ -16,11 +16,15 @@ const theme = createTheme({
   }
 })
 
+const queryClient = new QueryClient();
+
 export default function App({ Component, pageProps:{ session, ...pageProps} }: AppProps) {
   return (
     <SessionProvider session={session}>
       <NextUIProvider theme={theme}>
-        <Component {...pageProps} />
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+        </QueryClientProvider>
       </NextUIProvider>
     </SessionProvider>
   )
