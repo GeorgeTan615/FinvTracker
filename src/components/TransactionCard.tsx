@@ -1,24 +1,28 @@
-import React from 'react'
-import { Transaction } from './Transactions'
+import React from "react";
+import { Transaction } from "./Transactions";
+import TransactionLogo from "./TransactionLogo";
 
-const TransactionCard = ({transaction}:{transaction:Transaction}) => {
-  return (
-	 <div className="flex justify-between items-center rounded-xl bg-[#F8F8F8] p-3 w-full">
-		<div className="flex gap-4 items-center">
-			{transaction.transactionType}
-			{transaction.category} Logo
-			<div className="flex flex-col justify-center items-start">
-				<div>{transaction.category}</div>
-				<div>{transaction.description}</div>
+const TransactionCard = ({ transaction }: { transaction: Transaction }) => {
+	const amountColor = transaction.transactionType === "Income" ? "#00A86B" : "#FF5959";
+	const amountSymbol = transaction.transactionType === "Income" ? "+" : "-";
+	return (
+		<div className="flex w-full items-center justify-between rounded-xl bg-[#F8F8F8] px-4 py-3">
+			<div className="flex items-center gap-4">
+				<TransactionLogo category={transaction.category} />
+				<div className="flex flex-col items-start justify-center">
+					<div className="font-medium">{transaction.category}</div>
+					<div className="text-[#9B9B9B] text-sm">{transaction.description}</div>
+				</div>
+			</div>
+
+			<div className="flex flex-col items-end justify-center">
+				<div className={`font-semibold text-[${amountColor}]`}>
+					{amountSymbol} RM{transaction.amount}
+				</div>
+				<div className="text-[#9B9B9B] text-sm">{transaction.createdAt}</div>
 			</div>
 		</div>
+	);
+};
 
-		<div className='flex flex-col justify-center items-end'>
-			<div>{transaction.amount}</div>
-			<div>{transaction.createdAt}</div>
-		</div>
-	 </div>
-  )
-}
-
-export default TransactionCard
+export default TransactionCard;

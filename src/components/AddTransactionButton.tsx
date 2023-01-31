@@ -9,7 +9,6 @@ import {
 	Radio,
 	Input,
 	Spacer,
-	css,
 } from "@nextui-org/react";
 import { useState } from "react";
 import { UseMutateFunction } from "react-query";
@@ -27,28 +26,39 @@ interface AddTransactionProps {
 		unknown
 	>;
 }
+const expenseCategories = ["Shopping","Food & Beverages", "Transportation", "Subscription","Entertainment","Bills & Fees","Healthcare"]
+const incomeCategories = ["Salary", "Side Hustle", "Business Income", "Investment Income"]
 
 const AddTransactionButton = (props: AddTransactionProps) => {
 	// Modal logic
-	// const [visible, setVisible] = useState(false);
 	const { setVisible, bindings } = useModal();
 	const handler = () => setVisible(true);
 	const closeHandler = () => {
 		setVisible(false);
 	};
-	const [transactionType, setTransactionType] = useState("income");
+	const [transactionType, setTransactionType] = useState("Income");
 	const [description, setDescription] = useState<string>("");
 	const [amount, setAmount] = useState<number>(0);
-	const [category, setCategory] = useState<string>("US");
+	const [category, setCategory] = useState<string>("Salary");
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		console.log("here")
+	const handleRadioChange = (value:string) =>{
+		console.log(value)
+		if (value === 'Expense'){
+			setCategory("Shopping")
+		}
+		else{
+			setCategory("Salary")
+		}
+		setTransactionType(value);
+	}
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		props.mutate({ description, amount, category, transactionType });
-		setTransactionType("income");
+		await props.mutate({ description, amount, category, transactionType });
+		setTransactionType("Income");
 		setDescription("");
 		setAmount(0);
-		setCategory("US");
+		setCategory("Salary");
 		closeHandler();
 	};
 
@@ -88,16 +98,16 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 						<Radio.Group
 							css={{ fontSize: "$sm", color: "$black" }}
 							value={transactionType}
-							onChange={setTransactionType}
+							onChange={handleRadioChange}
 							size="sm"
 							label="Transaction Type"
-							defaultValue="income"
+							defaultValue="Income"
 							orientation="horizontal"
 							color="secondary"
 							isRequired
 						>
-							<Radio value="income">Income</Radio>
-							<Radio value="expense">Expense</Radio>
+							<Radio value="Income">Income</Radio>
+							<Radio value="Expense">Expense</Radio>
 						</Radio.Group>
 						<label
 							htmlFor="countries"
@@ -108,13 +118,13 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 						<select
 							value={category}
 							onChange={(e) => setCategory(e.target.value)}
-							id="countries"
 							className="block w-full rounded-2xl rounded-lg border-[2.1px] border-[#d9d8d8] p-3 text-sm text-gray-900"
 						>
-							<option value="United States">United States</option>
-							<option value="Canada">Canada</option>
-							<option value="France">France</option>
-							<option value="Germany">Germany</option>
+							{
+								transactionType === 'Income'
+								? incomeCategories.map((category)=><option value={category}>{category}</option>)
+								: expenseCategories.map((category)=><option value={category}>{category}</option>)
+							}
 						</select>
 						<Spacer y={0.05} />
 						<Input
