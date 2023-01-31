@@ -36,14 +36,14 @@ function TransactionCategoryMenu() {
 				</div> */}
 			</div>
 
-			<div className="relative rounded-md shadow-sm px-2 border-black">
+			<div className="relative rounded-md border-black px-2 shadow-sm">
 				{isOpen && (
-					<div className="absolute mt-1 w-full rounded-md bg-white shadow-lg border border-black">
+					<div className="absolute mt-1 w-full rounded-md border border-black bg-white shadow-lg">
 						<ul className="list-reset">
 							{options.map((option) => (
 								<li
 									key={option}
-									className={`px-3 py-2 text-gray-700 hover:bg-purple-100 cursor-pointer ${
+									className={`cursor-pointer px-3 py-2 text-gray-700 hover:bg-purple-100 ${
 										option === selected ? "bg-purple-300" : ""
 									}`}
 									onClick={() => handleOptionClick(option)}

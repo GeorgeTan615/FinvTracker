@@ -13,9 +13,9 @@ interface LoginMethodsProps {
 	> | null;
 }
 const LoginMethods = (props: LoginMethodsProps) => {
-	const landingUrl = `${baseUrl}/overview`
+	const landingUrl = `${baseUrl}/overview`;
 	return (
-		<div className="flex flex-col justify-center items-center gap-3">
+		<div className="flex flex-col items-center justify-center gap-3">
 			{props.providers &&
 				Object.values(props.providers).map((provider) => {
 					return (
@@ -24,21 +24,23 @@ const LoginMethods = (props: LoginMethodsProps) => {
 								<Button
 									auto
 									css={{
-										width :'120px',
-										height:'45px',
+										width: "120px",
+										height: "45px",
 										background: "white",
 										color: "$black",
 										borderRadius: "5px",
 										border: "$gray200 solid",
 										padding: "$0",
-										'&:hover': {
-											border: '$gray500 solid',
-										  },
+										"&:hover": {
+											border: "$gray500 solid",
+										},
 									}}
-									onClick={() => signIn(provider.id, { callbackUrl: landingUrl })}
+									onClick={() =>
+										signIn(provider.id, { callbackUrl: landingUrl })
+									}
 								>
 									<img
-										className="w-full h-full"
+										className="h-full w-full"
 										src={`/${provider.name}.svg`}
 										alt={`${provider.name} logo`}
 									></img>
