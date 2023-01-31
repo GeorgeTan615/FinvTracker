@@ -5,6 +5,7 @@ const TransactionCard = ({transaction}:{transaction:Transaction}) => {
   return (
 	 <div className="flex justify-between items-center rounded-xl bg-[#F8F8F8] p-3 w-full">
 		<div className="flex gap-4 items-center">
+			{transaction.transactionType}
 			{transaction.category} Logo
 			<div className="flex flex-col justify-center items-start">
 				<div>{transaction.category}</div>

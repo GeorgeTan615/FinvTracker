@@ -19,6 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 				amount: req.body.amount,
 				category: req.body.category,
 				userId: String(session.user.id),
+				transactionType: req.body.transactionType,
 			},
 		});
 		res.status(200).json({ transaction });

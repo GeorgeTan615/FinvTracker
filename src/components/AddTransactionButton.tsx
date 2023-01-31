@@ -22,6 +22,7 @@ interface AddTransactionProps {
 			description: string;
 			amount: number;
 			category: string;
+			transactionType:string;
 		},
 		unknown
 	>;
@@ -35,7 +36,7 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 	const closeHandler = () => {
 		setVisible(false);
 	};
-	const [transType, setTransType] = useState("income");
+	const [transactionType, setTransactionType] = useState("income");
 	const [description, setDescription] = useState<string>("");
 	const [amount, setAmount] = useState<number>(0);
 	const [category, setCategory] = useState<string>("US");
@@ -43,8 +44,8 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		console.log("here")
 		e.preventDefault();
-		props.mutate({ description, amount, category });
-		setTransType("income");
+		props.mutate({ description, amount, category, transactionType });
+		setTransactionType("income");
 		setDescription("");
 		setAmount(0);
 		setCategory("US");
@@ -86,8 +87,8 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 					<Modal.Body>
 						<Radio.Group
 							css={{ fontSize: "$sm", color: "$black" }}
-							value={transType}
-							onChange={setTransType}
+							value={transactionType}
+							onChange={setTransactionType}
 							size="sm"
 							label="Transaction Type"
 							defaultValue="income"

@@ -20,17 +20,19 @@ const IncomeSpendings = () => {
 		description,
 		amount,
 		category,
+		transactionType,
 	}: {
 		description: string;
 		amount: number;
 		category: string;
+		transactionType: string,
 	}) => {
 		const response = await fetch(`${baseUrl}/api/transactions`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ description, amount, category}),
+			body: JSON.stringify({ description, amount, category, transactionType}),
 		});
 		const data = await response.json();
 		return data;
@@ -41,13 +43,15 @@ const IncomeSpendings = () => {
 			description,
 			amount,
 			category,
+			transactionType,
 		}: {
 			description: string;
 			amount: number;
-			category:string
+			category:string,
+			transactionType: string,
 		}) => {
 			// Must await, so that after add transaction finishes, we will fire refetch
-			await addTransaction({ description, amount, category });
+			await addTransaction({ description, amount, category, transactionType });
 		},
 		{
 			onSuccess: () => {

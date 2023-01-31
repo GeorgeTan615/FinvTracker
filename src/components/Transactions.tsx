@@ -10,6 +10,7 @@ export interface Transaction{
 	createdAt:string,
 	userId:string,
 	category:string,
+	transactionType:string,
 }
 
 interface Transactions{
@@ -18,6 +19,7 @@ interface Transactions{
 		description: string;
 		amount: number;
 		category:string;
+		transactionType:string;
   }, unknown>
 }
 
