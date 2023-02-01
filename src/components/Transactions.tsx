@@ -38,7 +38,7 @@ const Transactions = (props:Transactions) => {
 	let tempArr:JSX.Element[] = []
 
 	// Handle transaction cards section based on dates
-	if (props.transactions){
+	if (props.transactions[0]){
 
 		let date = dateConvertString(props.transactions[0].createdAt)
 		transactionArr.push(
@@ -69,6 +69,13 @@ const Transactions = (props:Transactions) => {
 			</div>
 		);
 
+	}
+	else{
+		transactionArr.push(
+			<div className="flex flex-col justify-center items-center h-full pb-20 text-lg text-[#898989]">
+				No transactions made
+			</div>
+		)
 	}
 
 	return (

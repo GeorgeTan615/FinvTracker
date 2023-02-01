@@ -3,10 +3,10 @@ import AppLayout from "../components/AppLayout";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "./api/auth/[...nextauth]";
 import Transactions from "../components/Transactions";
-import DonutChart from "../components/DonutChart";
 import { Input } from "@nextui-org/react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { baseUrl } from "../configs/constants";
+import DoughnutChart from "../components/DoughnutChart";
 
 const IncomeSpendings = () => {
 	// const [page, setPage] = React.useState(2)
@@ -17,7 +17,6 @@ const IncomeSpendings = () => {
 		return data;
 	};
 	const { data, refetch } = useQuery(["getTransactions"], () => fetchTransactions(),{ keepPreviousData : true});
-	// console.log(data.hasMore)
 	const addTransaction = async ({
 		description,
 		amount,
@@ -64,20 +63,22 @@ const IncomeSpendings = () => {
 
 	return (
 		<AppLayout>
-			<div className="px-14 py-3 flex flex-col h-full">
+			<div className="px-14 py-2 flex flex-col h-full">
 				<h1>Income/Spendings</h1>
-				<div className="self-end flex items-center gap-5 bg-white p-2 rounded-xl">
+				<div className="self-end flex items-center gap-5 bg-white p-2 rounded-xl mb-3">
 					<Input width="186px" label="Start Date" type="date" />
 					<p className="font-semibold">to</p>
 					<Input width="186px" label="End Date" type="date" />
 				</div>
-				<div className="h-full grid grid-cols-7">
+				<div className="h-full grid grid-cols-7 gap-x-3">
 					{data && (
 						<Transactions transactions={data.transactions} mutate={mutate} />
 					)}
-					{/* One for Spendings One for Income */}
-					{/* <DonutChart />
-					<DonutChart  /> */}
+					<div className="col-span-3 flex flex-col gap-3">
+						<DoughnutChart title={"Spendings"}/>
+						<DoughnutChart title={"Income	"}/>
+
+					</div>
 				</div>
 			</div>
 		</AppLayout>
