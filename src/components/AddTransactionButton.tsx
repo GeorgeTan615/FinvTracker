@@ -38,11 +38,10 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 	};
 	const [transactionType, setTransactionType] = useState("Income");
 	const [description, setDescription] = useState<string>("");
-	const [amount, setAmount] = useState<number>(0);
+	const [amount, setAmount] = useState<number>(0.0);
 	const [category, setCategory] = useState<string>("Salary");
 
 	const handleRadioChange = (value:string) =>{
-		console.log(value)
 		if (value === 'Expense'){
 			setCategory("Shopping")
 		}
@@ -142,6 +141,7 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 							bordered
 							label="Amount"
 							type="number"
+							value={amount}
 							onChange={(e) =>
 								setAmount(parseFloat(parseFloat(e.target.value).toFixed(2)))
 							}

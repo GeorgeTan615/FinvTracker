@@ -9,13 +9,15 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import { baseUrl } from "../configs/constants";
 
 const IncomeSpendings = () => {
+	// const [page, setPage] = React.useState(2)
+	
 	const fetchTransactions = async () => {
 		const response = await fetch(`${baseUrl}/api/transactions`);
 		const data = await response.json();
 		return data;
 	};
-	const { data, refetch } = useQuery("getTransactions", fetchTransactions);
-
+	const { data, refetch } = useQuery(["getTransactions"], () => fetchTransactions(),{ keepPreviousData : true});
+	// console.log(data.hasMore)
 	const addTransaction = async ({
 		description,
 		amount,

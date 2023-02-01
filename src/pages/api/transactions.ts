@@ -28,7 +28,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		const transactions = await prisma.transaction.findMany({
 			where: {
 				userId: String(session.user.id),
-			}
+			},
+			orderBy:[
+				{
+					createdAt: 'desc',
+				}
+			]
 		});
 		res.status(200).json({ transactions });
 	} else {
