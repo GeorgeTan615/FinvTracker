@@ -4,3 +4,7 @@ export const baseUrl = (
 	: "https://finvtracker.vercel.app"
 )
 
+export const expenseCategories = ["Shopping","Food & Beverages", "Transportation", "Subscription","Entertainment","Bills & Fees","Healthcare"]
+export const incomeCategories = ["Salary", "Side Hustle", "Business Income", "Investment Income"]
+export const months = ['Jan','Feb','Mar','Apr','May','Jun', 'Jul','Aug','Sept','Oct','Nov','Dec']
+

@@ -6,32 +6,31 @@ import { MdSubscriptions, MdHealthAndSafety, MdPayments, MdWork, MdHomeWork } fr
 import { FaChartBar } from 'react-icons/fa'
 import { GoKebabHorizontal } from 'react-icons/go'
 
-const TransactionLogo = ({category}:{category:string}) => {
-	const logoSize = 20;
+const TransactionLogo = ({category,size=20}:{category:string,size?:number}) => {
 	if (category === 'Shopping')
-		return <RiShoppingCartFill size={logoSize}/>
+		return <RiShoppingCartFill size={size}/>
 	else if (category === 'Food & Beverages')
-		return <GiMeal size={logoSize}/>
+		return <GiMeal size={size}/>
 	else if (category === 'Transportation')
-		return <AiFillCar size={logoSize}/>
+		return <AiFillCar size={size}/>
 	else if (category === 'Subscription')
-		return <MdSubscriptions size={logoSize}/>
+		return <MdSubscriptions size={size}/>
 	else if (category === 'Entertainment')
-		return <GiPartyPopper size={logoSize}/>
+		return <GiPartyPopper size={size}/>
 	else if (category === 'Healthcare')
-			return <MdHealthAndSafety size={logoSize}/>
+			return <MdHealthAndSafety size={size}/>
 	else if (category === 'Bills & Fees')
-			return <MdPayments size={logoSize}/>
+			return <MdPayments size={size}/>
 	else if (category === 'Salary')
-		return <MdWork size={logoSize}/>
+		return <MdWork size={size}/>
 	else if (category === 'Side Hustle')
-		return <MdHomeWork size={logoSize}/>
+		return <MdHomeWork size={size}/>
 	else if (category === 'Business Income')
-		return <GiTakeMyMoney size={logoSize}/>
+		return <GiTakeMyMoney size={size}/>
 	else if (category === 'Investment Income')
-		return <FaChartBar size={logoSize}/>
+		return <FaChartBar size={size}/>
 	else
-		return <GoKebabHorizontal size={logoSize}/>
+		return <GoKebabHorizontal size={size}/>
 
 }
 

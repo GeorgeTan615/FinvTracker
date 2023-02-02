@@ -12,7 +12,7 @@ import {
 } from "@nextui-org/react";
 import { useState } from "react";
 import { UseMutateFunction } from "react-query";
-
+import { expenseCategories, incomeCategories } from "../configs/constants";
 interface AddTransactionProps {
 	mutate: UseMutateFunction<
 		void,
@@ -26,8 +26,6 @@ interface AddTransactionProps {
 		unknown
 	>;
 }
-const expenseCategories = ["Shopping","Food & Beverages", "Transportation", "Subscription","Entertainment","Bills & Fees","Healthcare"]
-const incomeCategories = ["Salary", "Side Hustle", "Business Income", "Investment Income"]
 
 const AddTransactionButton = (props: AddTransactionProps) => {
 	// Modal logic
