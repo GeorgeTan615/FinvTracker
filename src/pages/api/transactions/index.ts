@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../lib/prismadb";
-import { authOptions } from "./auth/[...nextauth]";
+import prisma from "../../../lib/prismadb";
+import { authOptions } from "../auth/[...nextauth]";
 import { unstable_getServerSession } from "next-auth";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {

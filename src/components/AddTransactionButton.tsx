@@ -121,8 +121,8 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 						>
 							{
 								transactionType === 'Income'
-								? incomeCategories.map((category)=><option value={category}>{category}</option>)
-								: expenseCategories.map((category)=><option value={category}>{category}</option>)
+								? incomeCategories.map((category,index)=><option key={index} value={category}>{category}</option>)
+								: expenseCategories.map((category,index)=><option key={index} value={category}>{category}</option>)
 							}
 						</select>
 						<Spacer y={0.05} />
