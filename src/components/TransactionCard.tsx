@@ -3,8 +3,7 @@ import { Transaction } from "./Transactions";
 import TransactionLogo from "./TransactionLogo";
 
 const TransactionCard = ({ transaction }: { transaction: Transaction }) => {
-	const amountColor = transaction.transactionType === "Income" ? "#00A86B" : "#FF5959";
-	const amountClass = `font-semibold text-[${amountColor}]`
+	const amountColor = transaction.transactionType === "Income" ? "text-[#00A86B]" : "text-[#FF5959]";
 	const amountSymbol = transaction.transactionType === "Income" ? "+" : "-";
 	const time = `${new Date(transaction.createdAt).getHours()}:${new Date(transaction.createdAt).getMinutes()}`
 	
@@ -19,7 +18,7 @@ const TransactionCard = ({ transaction }: { transaction: Transaction }) => {
 			</div>
 
 			<div className="flex flex-col items-end justify-center">
-				<div className={amountClass}>
+				<div className={`font-semibold ${amountColor}`}>
 					{amountSymbol} RM{transaction.amount}
 				</div>
 				<div className="text-[#9B9B9B] text-sm">{time}</div>
