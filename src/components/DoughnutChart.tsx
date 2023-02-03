@@ -17,7 +17,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
   };
 
   return (
-      <div className="py-4 px-7 bg-white rounded-3xl">
+      <div className="">
         <h3>{title}</h3>
         <div className="h-[40vh] mb-[1%] p-[1%]" >
             {

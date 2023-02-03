@@ -69,7 +69,7 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 				<IconContext.Provider
 					value={{ color: "#7F3DFF", className: "global-class-name" }}
 				>
-					<FaPlusCircle />
+					<FaPlusCircle/>
 				</IconContext.Provider>
 				<p className="font-semibold text-[#7F3DFF]">Add Transaction</p>
 			</button>
