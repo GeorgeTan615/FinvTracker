@@ -6,9 +6,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		try {
 			const { authorization } = req.headers;
 			if (authorization === `Bearer ${process.env.UPDATE_STOCKS_KEY}`) {
+				let r = (Math.random() + 1).toString(36).substring(7);
 				const updatedStock = await prisma.stock.create({
 					data: {
-						tickerSymbol: "test",
+						tickerSymbol: r,
 						name: "test",
 						quantity: 10.0,
 						averagePrice: 280.0,
