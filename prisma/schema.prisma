@@ -44,6 +44,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   Transaction   Transaction[]
+  Stock         Stock[]
 }
 
 model VerificationToken {
@@ -63,4 +64,24 @@ model Transaction {
   category        String
   transactionType String
   user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Stock {
+  tickerSymbol String      @id
+  name         String
+  quantity     Float
+  averagePrice Float
+  userId       String
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  StockData    StockData[]
+}
+
+model StockData {
+  id               String   @id @default(cuid())
+  tickerSymbol     String
+  date             DateTime
+  price            Float
+  change           Float
+  changePercentage String
+  stock Stock @relation(fields: [tickerSymbol], references: [tickerSymbol], onDelete: Cascade)
 }
