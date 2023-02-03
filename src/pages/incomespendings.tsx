@@ -17,16 +17,12 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { IconContext } from "react-icons";
 
 const IncomeSpendings = () => {
-	const allTransactions = useQuery(["getAllTransactions"], () =>
-		fetchAllTransactions()
+	const allTransactions = useQuery(["getAllTransactions"], () => fetchAllTransactions());
+	const allIncomeTransactionData = useQuery(["getAllIncomeTransactionData"], () =>
+		fetchTransactionsTypeData("income")
 	);
-	const allIncomeTransactionData = useQuery(
-		["getAllIncomeTransactionData"],
-		() => fetchTransactionsTypeData("income")
-	);
-	const allExpenseTransactionData = useQuery(
-		["getAllExpenseTransactionData"],
-		() => fetchTransactionsTypeData("expense")
+	const allExpenseTransactionData = useQuery(["getAllExpenseTransactionData"], () =>
+		fetchTransactionsTypeData("expense")
 	);
 
 	// Populate data to create charts, can create function in the future
@@ -62,14 +58,13 @@ const IncomeSpendings = () => {
 		},
 		{
 			onSuccess: () => {
-				refreshQueries(
-					[
-						"getAllTransactions",
-						"getAllIncomeTransactionData",
-						"getAllExpenseTransactionData",
-					],
-					queryClient
-				);
+				// refreshQueries(
+				// 	["getAllTransactions", "getAllIncomeTransactionData", "getAllExpenseTransactionData"],
+				// 	queryClient
+				// );
+				queryClient.invalidateQueries("getAllTransactions");
+				queryClient.invalidateQueries("getAllIncomeTransactionData");
+				queryClient.invalidateQueries("getAllExpenseTransactionData");
 			},
 		}
 	);
@@ -86,10 +81,7 @@ const IncomeSpendings = () => {
 				{allTransactions.data ? (
 					<div className="grid grid-cols-7 gap-x-4 pb-[30px]">
 						<div className="col-span-4">
-							<Transactions
-								transactions={allTransactions.data.result}
-								mutate={mutate}
-							/>
+							<Transactions transactions={allTransactions.data.result} mutate={mutate} />
 						</div>
 						<div className="col-span-3 flex flex-col gap-4">
 							<div className="rounded-3xl bg-white py-4 px-7">
@@ -100,22 +92,13 @@ const IncomeSpendings = () => {
 								/>
 							</div>
 							<div className="rounded-3xl bg-white py-4 px-7">
-								<DoughnutChart
-									title={"Incomes"}
-									chartLabels={incomeLabel}
-									chartData={incomeData}
-								/>
+								<DoughnutChart title={"Incomes"} chartLabels={incomeLabel} chartData={incomeData} />
 							</div>
 						</div>
 					</div>
 				) : (
-					<IconContext.Provider
-						value={{ color: "#C36CEC", className: "global-class-name" }}
-					>
-						<AiOutlineLoading
-							className="h-full animate-spin self-center"
-							size={70}
-						/>
+					<IconContext.Provider value={{ color: "#C36CEC", className: "global-class-name" }}>
+						<AiOutlineLoading className="h-full animate-spin self-center" size={70} />
 					</IconContext.Provider>
 				)}
 			</div>
@@ -126,11 +109,7 @@ const IncomeSpendings = () => {
 export default IncomeSpendings;
 
 export async function getServerSideProps(context: any) {
-	const session = await unstable_getServerSession(
-		context.req,
-		context.res,
-		authOptions
-	);
+	const session = await unstable_getServerSession(context.req, context.res, authOptions);
 
 	if (!session) {
 		return {

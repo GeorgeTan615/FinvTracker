@@ -77,14 +77,17 @@ const Transactions = (props: Transactions) => {
 		},
 		{
 			onSuccess: () => {
-				refreshQueries(
-					[
-						"getAllTransactions",
-						"getAllIncomeTransactionData",
-						"getAllExpenseTransactionData",
-					],
-					queryClient
-				);
+				// refreshQueries(
+				// 	[
+				// 		"getAllTransactions",
+				// 		"getAllIncomeTransactionData",
+				// 		"getAllExpenseTransactionData",
+				// 	],
+				// 	queryClient
+				// );
+				queryClient.invalidateQueries("getAllTransactions");
+				queryClient.invalidateQueries("getAllIncomeTransactionData");
+				queryClient.invalidateQueries("getAllExpenseTransactionData");
 			},
 		}
 	);
@@ -96,14 +99,17 @@ const Transactions = (props: Transactions) => {
 		},
 		{
 			onSuccess: () => {
-				refreshQueries(
-					[
-						"getAllTransactions",
-						"getAllIncomeTransactionData",
-						"getAllExpenseTransactionData",
-					],
-					queryClient
-				);
+				// refreshQueries(
+				// 	[
+				// 		"getAllTransactions",
+				// 		"getAllIncomeTransactionData",
+				// 		"getAllExpenseTransactionData",
+				// 	],
+				// 	queryClient
+				// );
+				queryClient.invalidateQueries("getAllTransactions");
+				queryClient.invalidateQueries("getAllIncomeTransactionData");
+				queryClient.invalidateQueries("getAllExpenseTransactionData");
 			},
 		}
 	);

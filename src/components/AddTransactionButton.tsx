@@ -1,15 +1,7 @@
 import React from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { IconContext } from "react-icons";
-import {
-	Modal,
-	useModal,
-	Button,
-	Text,
-	Radio,
-	Input,
-	Spacer,
-} from "@nextui-org/react";
+import { Modal, useModal, Button, Text, Radio, Input, Spacer } from "@nextui-org/react";
 import { useState } from "react";
 import { UseMutateFunction } from "react-query";
 import { expenseCategories, incomeCategories } from "../configs/constants";
@@ -21,7 +13,7 @@ interface AddTransactionProps {
 			description: string;
 			amount: number;
 			category: string;
-			transactionType:string;
+			transactionType: string;
 		},
 		unknown
 	>;
@@ -39,15 +31,14 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 	const [amount, setAmount] = useState<number>(0.0);
 	const [category, setCategory] = useState<string>("Salary");
 
-	const handleRadioChange = (value:string) =>{
-		if (value === 'Expense'){
-			setCategory("Shopping")
-		}
-		else{
-			setCategory("Salary")
+	const handleRadioChange = (value: string) => {
+		if (value === "Expense") {
+			setCategory("Shopping");
+		} else {
+			setCategory("Salary");
 		}
 		setTransactionType(value);
-	}
+	};
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -66,20 +57,13 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 				onClick={handler}
 				className="flex cursor-pointer items-center justify-center gap-1 rounded-lg border-none bg-[#eee5ff] px-3 transition delay-100 duration-300 ease-in-out hover:bg-[#E4d5fd]"
 			>
-				<IconContext.Provider
-					value={{ color: "#7F3DFF", className: "global-class-name" }}
-				>
-					<FaPlusCircle/>
+				<IconContext.Provider value={{ color: "#7F3DFF", className: "global-class-name" }}>
+					<FaPlusCircle />
 				</IconContext.Provider>
 				<p className="font-semibold text-[#7F3DFF]">Add Transaction</p>
 			</button>
-			<Modal
-				scroll
-				closeButton
-				aria-labelledby="modal-title"
-				width="45%"
-				{...bindings}
-			>
+
+			<Modal scroll closeButton aria-labelledby="modal-title" width="45%" {...bindings}>
 				<Modal.Header justify="flex-start">
 					<Text
 						b
@@ -106,10 +90,7 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 							<Radio value="Income">Income</Radio>
 							<Radio value="Expense">Expense</Radio>
 						</Radio.Group>
-						<label
-							htmlFor="countries"
-							className="mb-2 block text-sm text-gray-900"
-						>
+						<label htmlFor="countries" className="mb-2 block text-sm text-gray-900">
 							Category
 						</label>
 						<select
@@ -117,11 +98,17 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 							onChange={(e) => setCategory(e.target.value)}
 							className="block w-full rounded-2xl rounded-lg border-[2.1px] border-[#d9d8d8] p-3 text-sm text-gray-900"
 						>
-							{
-								transactionType === 'Income'
-								? incomeCategories.map((category,index)=><option key={index} value={category}>{category}</option>)
-								: expenseCategories.map((category,index)=><option key={index} value={category}>{category}</option>)
-							}
+							{transactionType === "Income"
+								? incomeCategories.map((category, index) => (
+										<option key={index} value={category}>
+											{category}
+										</option>
+								  ))
+								: expenseCategories.map((category, index) => (
+										<option key={index} value={category}>
+											{category}
+										</option>
+								  ))}
 						</select>
 						<Spacer y={0.05} />
 						<Input
@@ -140,12 +127,9 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 							label="Amount"
 							type="number"
 							value={amount}
-							onChange={(e) =>
-								setAmount(parseFloat(parseFloat(e.target.value).toFixed(2)))
-							}
+							onChange={(e) => setAmount(parseFloat(parseFloat(e.target.value).toFixed(2)))}
 						/>
 						<Spacer y={0.05} />
-						
 					</Modal.Body>
 				</form>
 				<Modal.Footer justify="flex-end">
