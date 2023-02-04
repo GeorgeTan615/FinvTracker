@@ -74,3 +74,26 @@ export const dateConvertString = (date: string) => {
 	const dateObj = new Date(date);
 	return `${months[dateObj.getMonth() - 1]} ${dateObj.getDay()}, ${dateObj.getFullYear()}`;
 };
+
+export const fetchStockQuote = async (stock:String) =>{
+	if (process.env.RAPIDAPI_KEY == undefined || process.env.RAPIDAPI_HOST == undefined){
+		return {message: 'invalid credentials'}
+	}
+	
+	const options = {
+		method: 'GET',
+		headers: {
+			'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
+			'X-RapidAPI-Host': process.env.RAPIDAPI_HOST
+		}
+	};
+	try{
+		const response = await fetch(`https://alpha-vantage.p.rapidapi.com/query?function=GLOBAL_QUOTE&symbol=${stock}&datatype=json`, options)
+		const data = response.json()
+		return data
+	}
+	catch(err:any){
+		return { message: err.message}
+	}
+
+}

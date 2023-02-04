@@ -44,7 +44,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   Transaction   Transaction[]
-  Stock         Stock[]
+  Investment    Investment[]
 }
 
 model VerificationToken {
@@ -60,28 +60,41 @@ model Transaction {
   description     String?
   amount          Float
   createdAt       DateTime @default(now())
-  userId          String
   category        String
   transactionType String
+  userId          String
   user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Stock {
-  tickerSymbol String      @id
-  name         String
-  quantity     Float
-  averagePrice Float
-  userId       String
-  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  StockData    StockData[]
+model Investment {
+  id                String            @id @default(cuid())
+  quantity          Float
+  averagePrice      Float
+  tickerSymbol      String
+  investmentProduct InvestmentProduct @relation(fields: [tickerSymbol], references: [tickerSymbol], onDelete: Cascade)
+  userId            String
+  user              User              @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model StockData {
-  id               String   @id @default(cuid())
-  tickerSymbol     String
-  date             DateTime
-  price            Float
-  change           Float
-  changePercentage String
-  stock Stock @relation(fields: [tickerSymbol], references: [tickerSymbol], onDelete: Cascade)
+// Easily extensible by adding other types, crypto, forex etc
+enum InvestmentType {
+  STOCK
+}
+
+model InvestmentProduct {
+  tickerSymbol          String                  @id
+  name                  String
+  type                  InvestmentType          @default(STOCK)
+  investmentProductData InvestmentProductData[]
+  Investment            Investment[]
+}
+
+model InvestmentProductData {
+  id                String            @id @default(cuid())
+  tickerSymbol      String
+  date              DateTime
+  price             Float
+  change            Float
+  changePercentage  String
+  investmentProduct InvestmentProduct @relation(fields: [tickerSymbol], references: [tickerSymbol], onDelete: Cascade)
 }
