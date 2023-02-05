@@ -31,7 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 								changePercentage: String(data["10. change percent"])
 							}
 						})
-						updatedStocks.push(stock.tickerSymbol)
+						updatedStocks.push(`${stock.tickerSymbol} ${data["07. latest trading day"]}`)
 					}
 					catch(err:any){
 						res.status(500).json({ statusCode: 500, message: err.message });
