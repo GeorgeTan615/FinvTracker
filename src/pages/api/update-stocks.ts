@@ -17,7 +17,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					}
 				})
 				// Fetch latest data for each stock and update in database
-				await distinctStocks.map(async(stock)=>{
+				let resu:any = []
+				await Promise.all(distinctStocks.map(async(stock)=>{
 					try{
 						let data = await fetchStockQuote(stock.tickerSymbol)
 						data = data['Global Quote']
@@ -30,14 +31,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 								changePercentage: String(data["10. change percent"])
 							}
 						})
+						resu.push(updatedStockData)
 						console.log(`${stock.tickerSymbol} updated sucessfully`)
 					}
 					catch(err:any){
 						console.log(`${stock.tickerSymbol} update failed`)
 						console.log(err)
 					}
-				})
-				res.status(200).json({ success: true });
+				}))
+				res.status(200).json({ success: distinctStocks });
 			} else {
 				res.status(401).json({ success: false });
 			}
