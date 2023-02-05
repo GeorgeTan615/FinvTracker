@@ -1,7 +1,7 @@
-# name: daily-update-stocks-data-cron
-# on:
-#   schedule:
-#     - cron: '* * * * *'
+name: daily-update-stocks-data-cron
+on:
+  schedule:
+    - cron: '* * * * *'
 jobs:
   cron:
     runs-on: ubuntu-latest
