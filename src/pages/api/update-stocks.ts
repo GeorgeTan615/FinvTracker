@@ -17,12 +17,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					}
 				})
 				// Fetch latest data for each stock and update in database
-				let resu:any = []
+				const updatedStocks:string[] = []
 				await Promise.all(distinctStocks.map(async(stock)=>{
 					try{
 						let data = await fetchStockQuote(stock.tickerSymbol)
 						data = data['Global Quote']
-						const updatedStockData = await prisma.investmentProductData.create({
+						await prisma.investmentProductData.create({
 							data:{
 								tickerSymbol: stock.tickerSymbol,
 								date: new Date(data["07. latest trading day"]),
@@ -31,15 +31,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 								changePercentage: String(data["10. change percent"])
 							}
 						})
-						resu.push(updatedStockData)
-						console.log(`${stock.tickerSymbol} updated sucessfully`)
+						updatedStocks.push(stock.tickerSymbol)
 					}
 					catch(err:any){
-						console.log(`${stock.tickerSymbol} update failed`)
-						console.log(err)
+						res.status(500).json({ statusCode: 500, message: err.message });
 					}
 				}))
-				res.status(200).json({ success: distinctStocks });
+				res.status(200).json(
+					{ success: true, 
+					  message: `${updatedStocks.join(', ')} updated successfully` 
+					});
 			} else {
 				res.status(401).json({ success: false });
 			}
