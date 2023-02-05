@@ -39,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				}))
 				res.status(200).json(
 					{ success: true, 
-					//   message: `${updatedStocks.join(', ')} updated successfully` 
+					  message: `${updatedStocks.join(', ')} updated successfully` ,
 					});
 			} else {
 				res.status(401).json({ success: false });
