@@ -3,13 +3,20 @@ import AppLayout from '../components/AppLayout'
 import { unstable_getServerSession } from "next-auth/next"
 import { authOptions } from "./api/auth/[...nextauth]"
 import { useSession } from "next-auth/react"
+import { fetchStockQuote } from '../utils'
+import { useQuery } from 'react-query'
 
 const Investments = () => {
 	const { data: session, status } = useSession();
+	const tslaData = useQuery('getTeslaTransaction',()=>fetchStockQuote('TSLA'))
+
+	if (!tslaData.isLoading){
+		console.log(tslaData.data)
+	}
 
 	return (
 		<AppLayout>
-			<div>hello world</div>
+			<div>hello world</div>			
 		</AppLayout>
 		
 	)

@@ -2,12 +2,12 @@
 # on:
 #   schedule:
 #     - cron: '* * * * *'
-# jobs:
-#   cron:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Update stocks
-#         run: |
-#           curl --request POST \
-#           --url 'https://finvtracker.vercel.app/api/update-stocks' \
-#           --header 'Authorization: Bearer ${{ secrets.FINVTRACKER_CRONJOB }}'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update stocks
+        run: |
+          curl --request POST \
+          --url 'https://finvtracker.vercel.app/api/update-stocks' \
+          --header 'Authorization: Bearer ${{ secrets.FINVTRACKER_CRONJOB }}'
