@@ -77,7 +77,7 @@ const IncomeSpendings = () => {
 				</div>
 				{allTransactions.data ? (
 					<div className="grid grid-cols-7 gap-x-4 pb-[30px]">
-						<div className="col-span-4">
+						<div className="col-span-4 rounded-3xl bg-white py-4 px-7">
 							<Transactions transactions={allTransactions.data.result} mutate={mutate} />
 						</div>
 						<div className="col-span-3 flex flex-col gap-4">
