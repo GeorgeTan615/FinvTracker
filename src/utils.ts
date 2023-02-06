@@ -1,6 +1,7 @@
 import { baseUrl } from "./configs/constants";
 import { useQueryClient, QueryClient } from "react-query";
 import { months } from "./configs/constants";
+
 export const fetchAllTransactions = async () => {
 	const response = await fetch(`${baseUrl}/api/transactions`);
 	const data = await response.json();
@@ -75,42 +76,79 @@ export const dateConvertString = (date: string) => {
 	return `${months[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
 };
 
-export const fetchStockQuote = async (stock: string) =>{
+export const fetchStockQuote = async (stock: string) => {
 	const options = {
-		method: 'GET',
+		method: "GET",
 		headers: {
-			'X-RapidAPI-Key': String(process.env.NEXT_PUBLIC_RAPIDAPI_KEY),
-			'X-RapidAPI-Host': String(process.env.NEXT_PUBLIC_RAPIDAPI_HOST)
-		}
+			"X-RapidAPI-Key": String(process.env.NEXT_PUBLIC_RAPIDAPI_KEY),
+			"X-RapidAPI-Host": String(process.env.NEXT_PUBLIC_RAPIDAPI_HOST),
+		},
 	};
-	try{
-		const response = await fetch(`https://alpha-vantage.p.rapidapi.com/query?function=GLOBAL_QUOTE&symbol=${stock}&datatype=json`, options)
+	try {
+		const response = await fetch(
+			`https://alpha-vantage.p.rapidapi.com/query?function=GLOBAL_QUOTE&symbol=${stock}&datatype=json`,
+			options
+		);
 		const data = await response.json();
-		return data
+		return data;
+	} catch (err: any) {
+		return { message: err.message };
 	}
-	catch(err:any){
-		return { message: err.message}
-	}
-}
+};
 
-export const searchStockQuote = async (stock:string) =>{
+export const searchStockQuote = async (stock: string) => {
 	const options = {
-		method: 'GET',
+		method: "GET",
 		headers: {
-			'X-RapidAPI-Key': String(process.env.NEXT_PUBLIC_RAPIDAPI_KEY),
-			'X-RapidAPI-Host': String(process.env.NEXT_PUBLIC_RAPIDAPI_HOST)
-		}
+			"X-RapidAPI-Key": String(process.env.NEXT_PUBLIC_RAPIDAPI_KEY),
+			"X-RapidAPI-Host": String(process.env.NEXT_PUBLIC_RAPIDAPI_HOST),
+		},
 	};
-	try{
-		const response = await fetch(`https://alpha-vantage.p.rapidapi.com/query?keywords=${stock}&function=SYMBOL_SEARCH&datatype=json`, options)
+	try {
+		const response = await fetch(
+			`https://alpha-vantage.p.rapidapi.com/query?keywords=${stock}&function=SYMBOL_SEARCH&datatype=json`,
+			options
+		);
 		const data = await response.json();
-		const results:string[] = []
-		data.bestMatches?.forEach((match:any)=>{
-			results.push(match["1. symbol"])
-		})
-		return { results }
+		const results: string[] = [];
+		data.bestMatches?.forEach((match: any) => {
+			results.push(match["1. symbol"]);
+		});
+		return { results };
+	} catch (err: any) {
+		return { results: err.message };
 	}
-	catch(err:any){
-		return { results: err.message}
-	}
+};
+
+export const addHoldings = async ({
+	quantity,
+	costPerUnit,
+	tickerSymbol,
+	holdingsType,
+}: {
+	quantity: number;
+	costPerUnit: number;
+	tickerSymbol: string;
+	holdingsType: string;
+}) => {
+	const response = await fetch(`${baseUrl}/api/investments`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			quantity,
+			averagePrice: costPerUnit,
+			tickerSymbol:tickerSymbol.toUpperCase(),
+			investmentProduct: holdingsType,
+		}),
+	});
+	const data = await response.json();
+	return data;
+};
+
+export const fetchAllHoldings = async() => {
+	const response = await fetch(`${baseUrl}/api/investments`);
+	const data = await response.json();
+	return data;
 }
