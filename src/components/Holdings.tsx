@@ -37,9 +37,10 @@ const Holdings = () => {
 
       {data && data.result && data.result.length > 0
       ? (
-        data.result.map((holding: Holding) => {
+        data.result.map((holding: Holding,index:number) => {
           return (
             <HoldingsCard
+              key={index}
               quantity={holding.quantity}
               averagePrice={holding.averagePrice}
               tickerSymbol={holding.tickerSymbol}
