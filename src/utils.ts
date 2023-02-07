@@ -1,6 +1,7 @@
 import { baseUrl } from "./configs/constants";
 import { useQueryClient, QueryClient } from "react-query";
 import { months } from "./configs/constants";
+import { queryClient } from "./pages/_app";
 
 export const fetchAllTransactions = async () => {
 	const response = await fetch(`${baseUrl}/api/transactions`);
@@ -139,7 +140,7 @@ export const addHoldings = async ({
 		body: JSON.stringify({
 			quantity,
 			averagePrice: costPerUnit,
-			tickerSymbol:tickerSymbol.toUpperCase(),
+			tickerSymbol: tickerSymbol.toUpperCase(),
 			investmentProduct: holdingsType,
 		}),
 	});
@@ -147,8 +148,63 @@ export const addHoldings = async ({
 	return data;
 };
 
-export const fetchAllHoldings = async() => {
+export const fetchAllHoldings = async () => {
 	const response = await fetch(`${baseUrl}/api/investments`);
+	const data = await response.json();
+	return data;
+};
+
+export const deleteHolding = async ({
+	id,
+}: {
+	id: string;
+}) => {
+	const response = await fetch(`${baseUrl}/api/investments/${id}`, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+	const data = await response.json();
+	return data;
+};
+
+export const updateHolding = async ({
+	id,
+	tickerSymbol,
+	quantity,
+	averagePrice,
+}: {
+	id: string;
+	tickerSymbol: string;
+	quantity: number;
+	averagePrice: number;
+}) => {
+	const response = await fetch(`${baseUrl}/api/investments/${id}`, {
+		method: "PATCH",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ tickerSymbol, quantity, averagePrice }),
+	});
+	const data = await response.json();
+	return data;
+};
+
+export const getLatestInvestmentProductData = async(tickerSymbol:string) =>{
+	const response = await fetch(`${baseUrl}/api/investmentproductdata/${tickerSymbol}`);
+	const data = await response.json();
+	return data;
+}
+
+export const getAllInvestmentProductData = async(latest:boolean = false) =>{
+	let response:Response;
+	if (latest){
+		response = await fetch(`${baseUrl}/api/investmentproductdata?latest=true`);
+	}
+	else{
+		response = await fetch(`${baseUrl}/api/investmentproductdata`);
+	}
 	const data = await response.json();
 	return data;
 }

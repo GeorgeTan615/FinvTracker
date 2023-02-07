@@ -7,22 +7,19 @@ import PortfolioCard from '../components/PortfolioCard'
 import HoldingsPerformance from '../components/HoldingsPerformance'
 import Holdings from '../components/Holdings'
 import { Input } from '@nextui-org/react'
+import { useQuery } from 'react-query'
+import { getAllInvestmentProductData } from '../utils'
 const Investments = () => {
-	const { data: session, status } = useSession();
-
+	// const { data: session, status } = useSession();
 
 	return (
 		<AppLayout>
 			<div className="flex h-full flex-col px-14 py-2 overflow-auto">
 				<h1>Investments</h1>
-				<div className="mb-3 flex items-center gap-5 self-end rounded-xl bg-white p-2">
-					<Input width="186px" label="Start Date" type="date" />
-					<p className="font-semibold">to</p>
-					<Input width="186px" label="End Date" type="date" />
-				</div>
+				<div className="py-3"/> 
 				<div className="grid grid-cols-2 gap-x-4">
 					<div className="col-span-1 bg-white rounded-3xl py-4 px-7">
-						<PortfolioCard />
+						<PortfolioCard />	
 					</div>
 					<div className="col-span-1 bg-white rounded-3xl py-4 px-7">
 						<HoldingsPerformance />

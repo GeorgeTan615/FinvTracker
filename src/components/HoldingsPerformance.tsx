@@ -1,8 +1,50 @@
 import React from 'react'
-
+import { useQuery } from 'react-query'
+import { getAllInvestmentProductData } from '../utils'
+import LineChart from './LineChart'
+interface Memo {
+	[key: string]: number
+ }
 const HoldingsPerformance = () => {
+	const { data, isLoading } = useQuery("getHoldingsChartData", () =>
+		getAllInvestmentProductData()
+	);
+	// Labels will be each day
+	const dailyNetValue:Memo = {}
+
+	data?.result?.forEach((investment:any)=>{
+		investment.investmentProduct.investmentProductData.forEach((dailyData:any)=>{
+			if (!(dailyData.date in dailyNetValue)){
+				dailyNetValue[dailyData.date] = dailyData.price * investment.quantity
+			}
+			else{
+				dailyNetValue[dailyData.date] += dailyData.price * investment.quantity
+			}
+		})
+	})
+	const sortable = [];
+	for (var date in dailyNetValue) {
+		 sortable.push([date,dailyNetValue[date]]);
+	}
+	sortable.sort((a,b)=>{
+		return new Date(b[0]).valueOf() - new Date(a[0]).valueOf()
+	})
+	const chartLabels:string[] = []
+	const chartData:number[] = []
+
+	sortable.forEach((obj)=>{
+		chartLabels.push(String(obj[0]))
+		chartData.push(parseFloat(parseFloat(String(obj[1])).toFixed(2)))
+	})
+	console.log(chartLabels)
+	console.log(chartData)
+
+
   return (
+	<>
 	 <h3>Performance</h3>
+	 <LineChart title='Holdings Performance' chartData={chartData} chartLabels={chartLabels} />
+	</>
   )
 }
 

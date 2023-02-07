@@ -43,8 +43,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  Transaction   Transaction[]
-  Investment    Investment[]
+  transaction   Transaction[]
+  investment    Investment[]
 }
 
 model VerificationToken {
@@ -67,7 +67,7 @@ model Transaction {
 }
 
 model Investment {
-  // id                String            @id @default(cuid())
+  id                String            @id @default(cuid())
   quantity          Float
   averagePrice      Float
   tickerSymbol      String
@@ -75,7 +75,7 @@ model Investment {
   userId            String
   user              User              @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@id([userId, tickerSymbol])
+  @@unique([userId, tickerSymbol])
 }
 
 // Easily extensible by adding other types, crypto, forex etc
@@ -87,8 +87,9 @@ model InvestmentProduct {
   tickerSymbol          String                  @id
   // name                  String
   type                  InvestmentType          @default(STOCK)
+  // investmentProductData InvestmentProductData[]
+  investment            Investment[]
   investmentProductData InvestmentProductData[]
-  Investment            Investment[]
 }
 
 model InvestmentProductData {

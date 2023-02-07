@@ -46,7 +46,6 @@ const AddHoldingsButton = () => {
 				console.log("User stopped typing");
 				const res = await searchStockQuote(e.target.value);
 				setBestMatches(res.results);
-				console.log(res);
 			}, 1000)
 		);
 	};
@@ -87,7 +86,7 @@ const AddHoldingsButton = () => {
 		},
 		{
 			onSuccess: () => {
-				refreshQueries(['getHoldings'],queryClient)
+				refreshQueries(['getHoldings','getAllInvestmentProductdata','getHoldingsChartData'],queryClient)
 			}
 		}
 	);
@@ -166,7 +165,7 @@ const AddHoldingsButton = () => {
 							bordered
 							label="Quantity"
 							type="number"
-							onChange={(e) => setQuantity(parseFloat(parseFloat(e.target.value).toFixed(2)))}
+							onChange={(e) => setQuantity(parseFloat(e.target.value))}
 						/>
 						<Spacer y={0.05} />
 						<Input
