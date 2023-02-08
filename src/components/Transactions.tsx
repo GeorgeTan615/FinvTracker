@@ -182,7 +182,7 @@ const Transactions = (props: Transactions) => {
 
 	return (
 		<>
-			<div className="h-full py-4 px-7">
+			<div className="h-full">
 				<div className="flex items-center justify-between">
 					<h3>Transactions</h3>
 					<AddTransactionButton mutate={props.mutate} />

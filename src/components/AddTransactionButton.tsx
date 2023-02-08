@@ -96,7 +96,7 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 						<select
 							value={category}
 							onChange={(e) => setCategory(e.target.value)}
-							className="block w-full rounded-2xlborder-[2.1px] border-[#d9d8d8] p-3 text-sm text-gray-900"
+							className="block w-full rounded-2xl border-[2.1px] border-[#d9d8d8] p-3 text-sm text-gray-900"
 						>
 							{transactionType === "Income"
 								? incomeCategories.map((category, index) => (

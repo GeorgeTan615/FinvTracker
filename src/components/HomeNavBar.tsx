@@ -17,13 +17,13 @@ const HomeNavBar = (props:HomeNavBarProps) => {
 	  setVisible(false);
 	};
 	return (
-		<nav className="flex justify-between pl-10 pr-10">
+		<nav className="flex justify-between items-center pl-10 pr-10">
 			<Link href="/">
 				<img
-					src="https://png.pngtree.com/png-clipart/20190903/original/pngtree-financial-icon-png-image_4420727.jpg"
+					src="/finvtrackerlogo.svg"
 					alt="Logo"
-					width={50}
-					height={50}
+					// width={200}
+					// height={50}
 				/>
 			</Link>
 			<div className="flex justify-center gap-10 text-lg font-semibold items-center">

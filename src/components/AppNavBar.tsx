@@ -17,10 +17,10 @@ const AppNavBar = () => {
 		<nav className="grid auto-rows-max grid-cols-3 p-5">
 			<Link className="flex-start flex justify-self-start" href="/overview">
 				<img
-					src="https://png.pngtree.com/png-clipart/20190903/original/pngtree-financial-icon-png-image_4420727.jpg"
+					src="/finvtrackerlogo.svg"
 					alt="Logo"
-					width={50}
-					height={50}
+					// width={50}
+					// height={50}
 					className="scale-150"
 				/>
 			</Link>
