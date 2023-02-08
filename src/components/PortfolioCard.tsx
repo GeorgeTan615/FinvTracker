@@ -28,12 +28,19 @@ const PortfolioCard = () => {
 
 				// Only need curr and prev daily value to calculate day gain and percentage
 				currDailyValue += investment.quantity * investment.curr.price;
-				prevDailyValue += investment.quantity * investment.prev.price;
+
+				if (investment.prev.price){
+					// console.log(investment.prev)
+					prevDailyValue += investment.quantity * investment.prev.price;
+				}
+
 			});
 
 			setTotalGain(parseFloat((value - overallCost).toFixed(2)));
 			setTotalGainPercentage(parseFloat((((value - overallCost) / overallCost) * 100).toFixed(2)));
 			setDayGain(parseFloat((currDailyValue - prevDailyValue).toFixed(2)));
+			console.log(currDailyValue)
+			console.log(prevDailyValue)
 			setDayGainPercentage(
 				parseFloat((((currDailyValue - prevDailyValue) / prevDailyValue) * 100).toFixed(2))
 			);
@@ -44,7 +51,7 @@ const PortfolioCard = () => {
 	return (
 		<div >
 			<h3>Portfolio</h3>
-			<div className="h-fit mb-[1%] py-[2%]">
+			<div>
 				{data && (
 					<div>
 						<div className="text-3xl font-bold">${portfolioValue}</div>

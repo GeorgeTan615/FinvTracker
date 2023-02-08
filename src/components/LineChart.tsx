@@ -39,17 +39,31 @@ const LineChart = ({
 			{
 				label: "USD",
 				data: chartData,
+				borderColor:'#C36CEC'
 				// backgroundColor: color,
 			},
 		],
 	};
 
 	const options = {
+		plugins:{
+			legend:{
+				display:false,
+			},
+			// title: {
+			// 	display: true,
+			// 	text: 'Chart.js Line Chart',
+			// 	font:{
+			// 		size:10,
+			// 	}
+			//  },
+		},
+
 		scales: {
 			x: {
 			  grid: {
 				 display: false
-			  }
+			  },
 			},
 			y: {
 			  grid: {
@@ -62,12 +76,12 @@ const LineChart = ({
 
 	return (
 		<div className="">
-			<div className="h-[20vh] mb-[1%] p-[1%]">
+			<div className="h-[120px]">
 				{chartLabels.length > 0 ? (
 					<Line options={options} data={data} />
 				) : (
 					<div className="flex h-full flex-col items-center justify-center pb-20 text-lg text-[#898989]">
-						No {title.toLowerCase()} transactions made
+						No {title.toLowerCase()} made
 					</div>
 				)}
 			</div>

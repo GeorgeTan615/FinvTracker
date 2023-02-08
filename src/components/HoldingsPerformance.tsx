@@ -2,6 +2,7 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { getAllInvestmentProductData } from '../utils'
 import LineChart from './LineChart'
+import { dateConvertString } from '../utils'
 interface Memo {
 	[key: string]: number
  }
@@ -27,23 +28,20 @@ const HoldingsPerformance = () => {
 		 sortable.push([date,dailyNetValue[date]]);
 	}
 	sortable.sort((a,b)=>{
-		return new Date(b[0]).valueOf() - new Date(a[0]).valueOf()
+		return new Date(a[0]).valueOf() - new Date(b[0]).valueOf()
 	})
 	const chartLabels:string[] = []
 	const chartData:number[] = []
 
 	sortable.forEach((obj)=>{
-		chartLabels.push(String(obj[0]))
+		chartLabels.push(dateConvertString(String(obj[0])))
 		chartData.push(parseFloat(parseFloat(String(obj[1])).toFixed(2)))
 	})
-	console.log(chartLabels)
-	console.log(chartData)
-
 
   return (
 	<>
-	 <h3>Performance</h3>
-	 <LineChart title='Holdings Performance' chartData={chartData} chartLabels={chartLabels} />
+	 <h3>Performance (Value per Day)</h3>
+	 <LineChart title='Holdings' chartData={chartData} chartLabels={chartLabels} />
 	</>
   )
 }
