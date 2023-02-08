@@ -22,8 +22,8 @@ const HomeNavBar = (props:HomeNavBarProps) => {
 				<img
 					src="/finvtrackerlogo.svg"
 					alt="Logo"
-					// width={200}
-					// height={50}
+					width={200}
+					height={50}
 				/>
 			</Link>
 			<div className="flex justify-center gap-10 text-lg font-semibold items-center">

@@ -19,8 +19,8 @@ const AppNavBar = () => {
 				<img
 					src="/finvtrackerlogo.svg"
 					alt="Logo"
-					// width={50}
-					// height={50}
+					width={200}
+					height={50}
 					className="scale-150"
 				/>
 			</Link>
