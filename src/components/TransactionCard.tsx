@@ -14,7 +14,7 @@ interface TransactionCardProps{
 const TransactionCard = (props:TransactionCardProps) => {
 	const amountColor = props.transaction.transactionType === "Income" ? "text-[#00A86B]" : "text-[#FF5959]";
 	const amountSymbol = props.transaction.transactionType === "Income" ? "+" : "-";
-	const time = `${new Date(props.transaction.createdAt).getHours()}:${new Date(props.transaction.createdAt).getMinutes()}`
+	const time = `${new Date(props.transaction.createdAt).getHours().toString().padStart(2,'0')}:${new Date(props.transaction.createdAt).getMinutes().toString().padStart(2,'0')}`
 	
 	const handleOnClick = () =>{
 		props.setIDType(props.transaction.id)
