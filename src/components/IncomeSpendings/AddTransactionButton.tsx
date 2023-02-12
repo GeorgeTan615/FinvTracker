@@ -5,6 +5,7 @@ import { Modal, useModal, Button, Text, Radio, Input, Spacer } from "@nextui-org
 import { useState } from "react";
 import { UseMutateFunction } from "react-query";
 import { expenseCategories, incomeCategories } from "../../configs/constants";
+import { uploadFile } from "@/src/utils";
 interface AddTransactionProps {
 	mutate: UseMutateFunction<
 		void,
@@ -30,6 +31,7 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 	const [description, setDescription] = useState<string>("");
 	const [amount, setAmount] = useState<number>(0.0);
 	const [category, setCategory] = useState<string>("Salary");
+	const [file, setFile] = useState<any>();
 
 	const handleRadioChange = (value: string) => {
 		if (value === "Expense") {
@@ -90,7 +92,7 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 							<Radio value="Income">Income</Radio>
 							<Radio value="Expense">Expense</Radio>
 						</Radio.Group>
-						<label htmlFor="countries" className="mb-2 block text-sm text-gray-900">
+						<label className="mb-2 block text-sm text-gray-900">
 							Category
 						</label>
 						<select
@@ -119,6 +121,22 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 							type="text"
 							onChange={(e) => setDescription(e.target.value)}
 						/>
+						<Spacer y={0.05} />
+						<label className="mb-2 block text-sm text-gray-900">
+							Image
+						</label>
+						<input type="file" onChange={(e)=>setFile(e.target.files && e.target.files[0])}/>
+						{file && (
+							<>
+								<p>Selected file: {file.name}</p>
+								<button
+									onClick={()=>uploadFile(file)}
+									className=" bg-purple-500 text-white p-2 rounded-sm shadow-md hover:bg-purple-700 transition-all"
+									>
+								Upload a File!
+								</button>
+							</>
+						)}
 						<Spacer y={0.05} />
 						<Input
 							required

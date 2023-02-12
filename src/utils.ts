@@ -208,3 +208,39 @@ export const getAllInvestmentProductData = async(latest:boolean = false) =>{
 	const data = await response.json();
 	return data;
 }
+
+export const uploadFile = async (file:File) => {
+	// setUploadingStatus("Uploading the file to AWS S3");
+
+	const response = await fetch(`${baseUrl}/api/s3/uploadFile`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ name: file.name, type: file.type}),
+	});
+
+	const data = await response.json();
+	const url = data.url;
+
+	// let { data: newData } = await axios.put(url, file, {
+	//   headers: {
+	// 	 "Content-type": file.type,
+	// 	 "Access-Control-Allow-Origin": "*",
+	//   },
+	// });
+	console.log(url)
+	console.log(file)
+
+	await fetch(url, {
+		method: "PUT",
+		headers: {
+			"Content-Type": file.type,
+			"Access-Control-Allow-Origin": "*",
+		},
+		body: file,
+	});
+
+	// setUploadedFile(BUCKET_URL + file.name);
+	// setFile(null);
+ };
