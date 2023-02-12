@@ -48,14 +48,16 @@ const IncomeSpendings = () => {
 			amount,
 			category,
 			transactionType,
+			file
 		}: {
 			description: string;
 			amount: number;
 			category: string;
 			transactionType: string;
+			file: File | undefined;
 		}) => {
 			// Must await, so that after add transaction finishes, we will fire refetch
-			await addTransaction({ description, amount, category, transactionType });
+			await addTransaction({ description, amount, category, transactionType, file});
 		},
 		{
 			onSuccess: () => {

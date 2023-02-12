@@ -15,6 +15,7 @@ interface AddTransactionProps {
 			amount: number;
 			category: string;
 			transactionType: string;
+			file: File | undefined
 		},
 		unknown
 	>;
@@ -44,11 +45,12 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		await props.mutate({ description, amount, category, transactionType });
+		await props.mutate({ description, amount, category, transactionType, file });
 		setTransactionType("Income");
 		setDescription("");
 		setAmount(0);
 		setCategory("Salary");
+		setFile(undefined);
 		closeHandler();
 	};
 
@@ -92,9 +94,7 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 							<Radio value="Income">Income</Radio>
 							<Radio value="Expense">Expense</Radio>
 						</Radio.Group>
-						<label className="mb-2 block text-sm text-gray-900">
-							Category
-						</label>
+						<label className="mb-2 block text-sm text-gray-900">Category</label>
 						<select
 							value={category}
 							onChange={(e) => setCategory(e.target.value)}
@@ -114,6 +114,7 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 						</select>
 						<Spacer y={0.05} />
 						<Input
+						   maxLength={30}
 							required
 							clearable
 							bordered
@@ -122,21 +123,12 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 							onChange={(e) => setDescription(e.target.value)}
 						/>
 						<Spacer y={0.05} />
-						<label className="mb-2 block text-sm text-gray-900">
-							Image
-						</label>
-						<input type="file" onChange={(e)=>setFile(e.target.files && e.target.files[0])}/>
-						{file && (
-							<>
-								<p>Selected file: {file.name}</p>
-								<button
-									onClick={()=>uploadFile(file)}
-									className=" bg-purple-500 text-white p-2 rounded-sm shadow-md hover:bg-purple-700 transition-all"
-									>
-								Upload a File!
-								</button>
-							</>
-						)}
+						<label className="mb-2 block text-sm text-gray-900">Image</label>
+						<input 
+							className="block w-full rounded-xl border border-[2.4px] border-solid border-[#d9d8d8] px-3 py-1.5 transition ease-in-out"
+							type="file"
+							onChange={(e)=>setFile(e.target.files && e.target.files[0])}
+						/>
 						<Spacer y={0.05} />
 						<Input
 							required
@@ -147,7 +139,6 @@ const AddTransactionButton = (props: AddTransactionProps) => {
 							value={amount}
 							onChange={(e) => setAmount(parseFloat(parseFloat(e.target.value).toFixed(2)))}
 						/>
-						<Spacer y={0.05} />
 					</Modal.Body>
 				</form>
 				<Modal.Footer justify="flex-end">

@@ -1,7 +1,6 @@
 import { baseUrl } from "./configs/constants";
-import { useQueryClient, QueryClient } from "react-query";
+import { QueryClient } from "react-query";
 import { months } from "./configs/constants";
-import { queryClient } from "./pages/_app";
 
 export const fetchAllTransactions = async () => {
 	const response = await fetch(`${baseUrl}/api/transactions`);
@@ -18,18 +17,25 @@ export const addTransaction = async ({
 	amount,
 	category,
 	transactionType,
+	file
 }: {
 	description: string;
 	amount: number;
 	category: string;
 	transactionType: string;
+	file: File | undefined
 }) => {
+	let fileName = ""
+	if (file){
+		await uploadFile(file)
+		fileName = file.name
+	}
 	const response = await fetch(`${baseUrl}/api/transactions`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({ description, amount, category, transactionType }),
+		body: JSON.stringify({ description, amount, category, transactionType, fileName }),
 	});
 	const data = await response.json();
 	return data;
@@ -210,9 +216,8 @@ export const getAllInvestmentProductData = async(latest:boolean = false) =>{
 }
 
 export const uploadFile = async (file:File) => {
-	// setUploadingStatus("Uploading the file to AWS S3");
-
-	const response = await fetch(`/api/s3/uploadFile`, {
+	console.log(file.name,file.type)
+	const response = await fetch(`${baseUrl}/api/s3/uploadFile`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -220,17 +225,11 @@ export const uploadFile = async (file:File) => {
 		body: JSON.stringify({ name: file.name, type: file.type}),
 	});
 
+	console.log('HERE3')
+
 	const data = await response.json();
 	const url = data.url;
-
-	// let { data: newData } = await axios.put(url, file, {
-	//   headers: {
-	// 	 "Content-type": file.type,
-	// 	 "Access-Control-Allow-Origin": "*",
-	//   },
-	// });
 	console.log(url)
-	console.log(file)
 
 	await fetch(url, {
 		method: "PUT",
@@ -241,6 +240,4 @@ export const uploadFile = async (file:File) => {
 		body: file,
 	});
 
-	// setUploadedFile(BUCKET_URL + file.name);
-	// setFile(null);
  };

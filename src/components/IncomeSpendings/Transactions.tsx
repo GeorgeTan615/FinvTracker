@@ -16,6 +16,7 @@ export interface Transaction {
 	userId: string;
 	category: string;
 	transactionType: string;
+	image:string;
 }
 
 interface Transactions {
@@ -28,6 +29,7 @@ interface Transactions {
 			amount: number;
 			category: string;
 			transactionType: string;
+			file: File | undefined;
 		},
 		unknown
 	>;
@@ -45,6 +47,7 @@ const Transactions = (props: Transactions) => {
 	const [description, setDescription] = useState<string>("");
 	const [amount, setAmount] = useState<number>(0);
 	const [category, setCategory] = useState<string>("");
+	const [image, setImage] = useState<string>("");
 
 	const { setVisible, bindings } = useModal();
 	const handler = () => setVisible(true);
@@ -164,6 +167,7 @@ const Transactions = (props: Transactions) => {
 					setDescription={setDescription}
 					setAmount={setAmount}
 					setCategory={setCategory}
+					setImage={setImage}
 				/>
 			);
 		});
@@ -251,8 +255,21 @@ const Transactions = (props: Transactions) => {
 										</option>
 								  ))}
 						</select>
-						<Spacer y={0.05} />
+						<Spacer y={0.03} />
+						{
+							image !== "" && (
+								<div className="flex flex-col block w-full">
+									<label className="mb-2 block text-sm text-gray-900">
+										Image
+									</label>
+									<div className="flex flex-col items-center py-3 rounded-2xl rounded-lg border border-[2.4px] border-solid border-[#d9d8d8]">
+										<img src={image} alt="Transaction Image" className="w-28 self-center" />
+									</div>
+								</div>
+							)
+						}
 						<Input
+							maxLength={30}
 							required
 							clearable
 							bordered

@@ -8,3 +8,4 @@ export const expenseCategories = ["Shopping","Food & Beverages", "Transportation
 export const incomeCategories = ["Salary", "Side Hustle", "Business Income", "Investment Income"]
 export const months = ['Jan','Feb','Mar','Apr','May','Jun', 'Jul','Aug','Sept','Oct','Nov','Dec']
 
+export const S3Url = "https://finvtracker-media.s3.ap-southeast-1.amazonaws.com"

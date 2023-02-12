@@ -10,6 +10,7 @@ interface TransactionCardProps{
 	setDescription:React.Dispatch<React.SetStateAction<string>>,
 	setAmount:React.Dispatch<React.SetStateAction<number>>,
 	setCategory:React.Dispatch<React.SetStateAction<string>>,
+	setImage:React.Dispatch<React.SetStateAction<string>>,
 }
 const TransactionCard = (props:TransactionCardProps) => {
 	const amountColor = props.transaction.transactionType === "Income" ? "text-[#00A86B]" : "text-[#FF5959]";
@@ -22,21 +23,25 @@ const TransactionCard = (props:TransactionCardProps) => {
 		props.setDescription(props.transaction.description)
 		props.setAmount(props.transaction.amount)
 		props.setCategory(props.transaction.category)
+		props.setImage(props.transaction.image)
 		props.handler()
 	}
-
 	return (
 		<>
-			<div className="flex w-full items-center justify-between rounded-xl bg-[#F8F8F8] px-4 py-3 cursor-pointer transition ease-in-out duration-300 hover:bg-[#E9E9E9]" onClick={handleOnClick}>
-				<div className="flex items-center gap-4">
+			<div className="grid grid-cols-11 w-full h-full items-center justify-between rounded-xl bg-[#F8F8F8] px-4 py-3 cursor-pointer transition ease-in-out duration-300 hover:bg-[#E9E9E9]" onClick={handleOnClick}>
+				<div className="col-span-5 flex items-center gap-4">
 					<TransactionLogo category={props.transaction.category} />
 					<div className="flex flex-col items-start justify-center">
 						<div className="font-medium">{props.transaction.category}</div>
 						<div className="text-[#9B9B9B] text-sm">{props.transaction.description}</div>
 					</div>
 				</div>
-
-				<div className="flex flex-col items-end justify-center">
+				<div className="col-span-4 justify-self-center">
+					{
+						props.transaction.image && (<img src={props.transaction.image} alt="img" className="h-10"/>)
+					}
+				</div>
+				<div className="col-span-2 flex flex-col items-end justify-center">
 					<div className={`font-semibold ${amountColor}`}>
 						{amountSymbol} RM{props.transaction.amount}
 					</div>
