@@ -212,7 +212,7 @@ export const getAllInvestmentProductData = async(latest:boolean = false) =>{
 export const uploadFile = async (file:File) => {
 	// setUploadingStatus("Uploading the file to AWS S3");
 
-	const response = await fetch(`${baseUrl}/api/s3/uploadFile`, {
+	const response = await fetch(`/api/s3/uploadFile`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
