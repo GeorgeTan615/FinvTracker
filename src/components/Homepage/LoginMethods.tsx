@@ -4,7 +4,7 @@ import { LiteralUnion } from "next-auth/react";
 import { BuiltInProviderType } from "next-auth/providers";
 import { ClientSafeProvider } from "next-auth/react";
 import { Button } from "@nextui-org/react";
-import { baseUrl } from "../configs/constants";
+import { baseUrl } from "../../configs/constants";
 
 interface LoginMethodsProps {
 	providers: Record<

@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 import { Modal, useModal, Button, Text, Radio, Input, Spacer } from "@nextui-org/react";
 import { useState } from "react";
 import { UseMutateFunction } from "react-query";
-import { expenseCategories, incomeCategories } from "../configs/constants";
+import { expenseCategories, incomeCategories } from "../../configs/constants";
 interface AddTransactionProps {
 	mutate: UseMutateFunction<
 		void,

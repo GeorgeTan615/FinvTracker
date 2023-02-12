@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeLayout from '../components/HomeLayout'
+import HomeLayout from '../components/Homepage/HomeLayout'
 import Head from 'next/head'
 import { getProviders } from 'next-auth/react'
 import { LiteralUnion } from "next-auth/react"

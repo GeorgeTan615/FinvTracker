@@ -1,8 +1,8 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { queryClient } from "../pages/_app";
-import prisma from "../lib/prismadb";
-import { getLatestInvestmentProductData, refreshQueries } from "../utils";
+import { queryClient } from "../../pages/_app";
+import prisma from "../../lib/prismadb";
+import { getLatestInvestmentProductData, refreshQueries } from "../../utils";
 interface HoldingsCardProps{
 	id: string,
 	quantity: number,

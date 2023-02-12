@@ -1,11 +1,11 @@
 import React from 'react'
-import AppLayout from '../components/AppLayout'
+import AppLayout from '../components/App/AppLayout'
 import { unstable_getServerSession } from "next-auth/next"
 import { authOptions } from "./api/auth/[...nextauth]"
 import { useSession } from "next-auth/react"
-import PortfolioCard from '../components/PortfolioCard'
-import HoldingsPerformance from '../components/HoldingsPerformance'
-import Holdings from '../components/Holdings'
+import PortfolioCard from '../components/Investments/PortfolioCard'
+import HoldingsPerformance from '../components/Investments/HoldingsPerformance'
+import Holdings from '../components/Investments/Holdings'
 import { Input } from '@nextui-org/react'
 import { useQuery } from 'react-query'
 import { getAllInvestmentProductData } from '../utils'
@@ -46,21 +46,21 @@ const Investments = () => {
 
 export default Investments
 
-// export async function getServerSideProps(context:any) {
-// 	const session = await unstable_getServerSession(context.req, context.res, authOptions)
+export async function getServerSideProps(context:any) {
+	const session = await unstable_getServerSession(context.req, context.res, authOptions)
   
-// 	if (!session) {
-// 	  return {
-// 		redirect: {
-// 		  destination: '/',
-// 		  permanent: false,
-// 		},
-// 	  }
-// 	}
+	if (!session) {
+	  return {
+		redirect: {
+		  destination: '/',
+		  permanent: false,
+		},
+	  }
+	}
   
-// 	return {
-// 	  props: {
-// 		session,
-// 	  },
-// 	}
-//   }
+	return {
+	  props: {
+		session,
+	  },
+	}
+  }

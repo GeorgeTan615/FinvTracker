@@ -1,7 +1,7 @@
 import { truncate } from "fs";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { getAllInvestmentProductData } from "../utils";
+import { getAllInvestmentProductData } from "../../utils";
 
 const PortfolioCard = () => {
 	// make api call to fetch total value of user portfolio

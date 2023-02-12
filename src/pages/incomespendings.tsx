@@ -1,11 +1,11 @@
 import React from "react";
-import AppLayout from "../components/AppLayout";
+import AppLayout from "../components/App/AppLayout";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "./api/auth/[...nextauth]";
-import Transactions from "../components/Transactions";
+import Transactions from "../components/IncomeSpendings/Transactions";
 import { Input } from "@nextui-org/react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import DoughnutChart from "../components/DoughnutChart";
+import DoughnutChart from "../components/Charts/DoughnutChart";
 import {
 	fetchAllTransactions,
 	fetchTransactionsTypeData,
@@ -113,21 +113,21 @@ const IncomeSpendings = () => {
 
 export default IncomeSpendings;
 
-// export async function getServerSideProps(context: any) {
-// 	const session = await unstable_getServerSession(context.req, context.res, authOptions);
+export async function getServerSideProps(context: any) {
+	const session = await unstable_getServerSession(context.req, context.res, authOptions);
 
-// 	if (!session) {
-// 		return {
-// 			redirect: {
-// 				destination: "/",
-// 				permanent: false,
-// 			},
-// 		};
-// 	}
+	if (!session) {
+		return {
+			redirect: {
+				destination: "/",
+				permanent: false,
+			},
+		};
+	}
 
-// 	return {
-// 		props: {
-// 			session,
-// 		},
-// 	};
-// }
+	return {
+		props: {
+			session,
+		},
+	};
+}

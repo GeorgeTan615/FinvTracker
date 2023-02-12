@@ -1,8 +1,8 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import { getAllInvestmentProductData } from '../utils'
-import LineChart from './LineChart'
-import { dateConvertString } from '../utils'
+import { getAllInvestmentProductData } from '../../utils'
+import LineChart from '../Charts/LineChart'
+import { dateConvertString } from '../../utils'
 interface Memo {
 	[key: string]: number
  }

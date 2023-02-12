@@ -30,9 +30,9 @@ const HomeNavBar = (props:HomeNavBarProps) => {
 				<Link href="#" legacyBehavior>
 					<a className="text-black">About</a>
 				</Link>
-				<Link href="#" legacyBehavior>
+				{/* <Link href="#" legacyBehavior>
 					<a className="text-black">Sign Up</a>
-				</Link>
+				</Link> */}
 				<button onClick={handler} className="transition ease-in-out delay-100 duration-300 bg-[#C36CEC] text-white border-none py-2 px-5 rounded-xl font-semibold cursor-pointer hover:bg-[#AF61D4]">
 					Login
 				</button>

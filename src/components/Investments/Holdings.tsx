@@ -1,11 +1,11 @@
 import React from "react";
 import AddHoldingsButton from "./AddHoldingsButton";
 import { useMutation, useQuery } from "react-query";
-import { deleteHolding, fetchAllHoldings, refreshQueries, searchStockQuote, updateHolding } from "../utils";
+import { deleteHolding, fetchAllHoldings, refreshQueries, searchStockQuote, updateHolding } from "../../utils";
 import HoldingsCard from "./HoldingsCard";
 import { useState } from "react";
 import { Modal, useModal, Button, Text, Radio, Input, Spacer, FormElement, } from "@nextui-org/react";
-import { queryClient } from "../pages/_app";
+import { queryClient } from "../../pages/_app";
 import { useSession } from "next-auth/react";
 interface Holding {
 	id: string,

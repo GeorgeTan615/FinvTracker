@@ -13,9 +13,9 @@ import {
 } from "@nextui-org/react";
 import { useState, useEffect } from "react";
 import { useMutation } from "react-query";
-import { searchStockQuote } from "../utils";
-import { refreshQueries, addHoldings } from "../utils";
-import { queryClient } from "../pages/_app";
+import { searchStockQuote } from "../../utils";
+import { refreshQueries, addHoldings } from "../../utils";
+import { queryClient } from "../../pages/_app";
 
 const AddHoldingsButton = () => {
 	// Modal logic

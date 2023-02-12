@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import AddTransactionButton from "./AddTransactionButton";
 import TransactionCard from "./TransactionCard";
 import { UseMutateFunction, useMutation } from "react-query";
-import { dateConvertString, updateTransaction, deleteTransaction, refreshQueries, } from "../utils";
+import { dateConvertString, updateTransaction, deleteTransaction, refreshQueries, } from "../../utils";
 import { Modal, useModal, Button, Text, Radio, Input, Spacer, } from "@nextui-org/react";
 import TransactionLogo from "./TransactionLogo";
-import { incomeCategories, expenseCategories } from "../configs/constants";
-import { queryClient } from "../pages/_app";
+import { incomeCategories, expenseCategories } from "../../configs/constants";
+import { queryClient } from "../../pages/_app";
 
 export interface Transaction {
 	id: string;
