@@ -27,8 +27,8 @@ export const addTransaction = async ({
 }) => {
 	let fileName = ""
 	if (file){
-		await uploadFile(file)
-		fileName = file.name
+		const isCreated = await uploadFile(file)
+		fileName = isCreated ? file.name : "" 
 	}
 	const response = await fetch(`${baseUrl}/api/transactions`, {
 		method: "POST",
@@ -216,28 +216,35 @@ export const getAllInvestmentProductData = async(latest:boolean = false) =>{
 }
 
 export const uploadFile = async (file:File) => {
-	console.log(file.name,file.type)
-	const response = await fetch(`${baseUrl}/api/s3/uploadFile`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ name: file.name, type: file.type}),
-	});
-
-	console.log('HERE3')
-
-	const data = await response.json();
-	const url = data.url;
-	console.log(url)
-
-	await fetch(url, {
-		method: "PUT",
-		headers: {
-			"Content-Type": file.type,
-			"Access-Control-Allow-Origin": "*",
-		},
-		body: file,
-	});
+	try{
+		const response = await fetch(`${baseUrl}/api/s3/uploadFile`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ name: file.name, type: file.type}),
+		});
+	
+		console.log('HERE3')
+	
+		const data = await response.json();
+		const url = data.url;
+		console.log(url)
+	
+		await fetch(url, {
+			method: "PUT",
+			headers: {
+				"Content-Type": file.type,
+				"Access-Control-Allow-Origin": "*",
+			},
+			body: file,
+		});
+		return true
+	}
+	catch(err:any){
+		console.log('---------HER---------------')
+		console.log(err.message)
+		return false
+	}
 
  };

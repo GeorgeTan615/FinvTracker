@@ -15,7 +15,15 @@ const Overview = () => {
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
 			<AppLayout>
-				<div></div>
+				<div className="flex h-full flex-col px-14 py-2">
+					<h1>Overview</h1>
+					<div className="w-full h-full bg-white rounded-3xl flex flex-col justify-center items-center">
+						<h3 className="text-4xl font-semibold text-[#898989] animate-pulse">
+							Dashboard Coming Soon!
+						</h3>
+
+					</div>
+				</div>
 			</AppLayout>
 		</>
 

@@ -79,11 +79,11 @@ const IncomeSpendings = () => {
 			<AppLayout>
 				<div className="flex h-full flex-col px-14 py-2">
 					<h1>Income/Spendings</h1>
-					<div className="mb-3 flex items-center gap-5 self-end rounded-xl bg-white p-2">
+					{/* <div className="mb-3 flex items-center gap-5 self-end rounded-xl bg-white p-2">
 						<Input width="186px" label="Start Date" type="date" />
 						<p className="font-semibold">to</p>
 						<Input width="186px" label="End Date" type="date" />
-					</div>
+					</div> */}
 					{allTransactions.data ? (
 						<div className="grid grid-cols-7 gap-x-4 pb-[30px]">
 							<div className="col-span-4 rounded-3xl bg-white py-4 px-7">
