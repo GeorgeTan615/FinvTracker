@@ -36,15 +36,15 @@ const AppNavBar = () => {
 						Overview
 					</a>
 				</Link>
-				<Link href="/incomespendings" legacyBehavior>
+				<Link href="/incomeexpenses" legacyBehavior>
 					<a
 						className={
-							router.pathname === "/incomespendings"
+							router.pathname === "/incomeexpenses"
 								? activeTabStyle
 								: notActiveTabStyle
 						}
 					>
-						Income/Spendings
+						Income/Expenses
 					</a>
 				</Link>
 				<Link href="/investments" legacyBehavior>

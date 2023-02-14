@@ -38,7 +38,7 @@ export async function getServerSideProps(context:any) {
 	if (session) {
 		return {
 			redirect: {
-				destination: '/overview',
+				destination: '/incomeexpenses',
 				permanent: false,
 			},
 		}

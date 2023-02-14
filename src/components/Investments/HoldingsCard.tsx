@@ -31,7 +31,7 @@ const HoldingsCard = (props:HoldingsCardProps) => {
 		<>
 			{
 				data && data.result.length > 0  && (
-					<div className="grid grid-cols-6 place-items-center mb-3 rounded-xl bg-[#F8F8F8] py-3 cursor-pointer transition ease-in-out duration-300 hover:bg-[#F6F2FF]" onClick={handleOnClick}>
+					<div className="grid grid-cols-6 place-items-center mb-3 rounded-xl bg-[#F8F8F8] py-3 cursor-pointer transition ease-in-out duration-300 hover:bg-[#E9E9E9]" onClick={handleOnClick}>
 						<div className="font-semibold">{props.tickerSymbol}</div>
 						{/* Quantity */}
 						<div>{props.quantity}</div>
@@ -46,7 +46,7 @@ const HoldingsCard = (props:HoldingsCardProps) => {
 						</div>
 						{/* Total Gain */}
 						<div>
-							${((data.result[0].price - props.averagePrice) * props.quantity).toFixed(2)} 
+							{((data.result[0].price - props.averagePrice) * props.quantity).toFixed(2)} 
 							<span className={(data.result[0].price - props.averagePrice)/props.averagePrice > 0 ? 'text-[#00A86B]' : 'text-[#FF5959]'}>
 								&nbsp;({(data.result[0].price - props.averagePrice)/props.averagePrice > 0 ? '+':''}{((data.result[0].price - props.averagePrice)/props.averagePrice * 100).toFixed(2)}%)
 							</span>

@@ -116,7 +116,7 @@ const Holdings = () => {
 				<h3>Holdings</h3>
 				<AddHoldingsButton />
 			</div>
-			<div className="mt-3 mb-1 grid grid-cols-6 place-items-center divide-y font-bold">
+			<div className="mt-3 mb-1 grid grid-cols-6 place-items-center divide-y font-bold text-center">
 				<div>Ticker Symbol</div>
 				<div>Quantity</div>
 				<div>Average Cost/unit</div>

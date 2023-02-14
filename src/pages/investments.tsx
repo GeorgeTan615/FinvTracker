@@ -23,7 +23,7 @@ const Investments = () => {
 			<AppLayout>
 				<div className="flex h-full flex-col px-14 py-2 overflow-auto">
 					<h1>Investments</h1>
-					<div className="py-3"/> 
+					{/* <div className="py-3"/>  */}
 					<div className="grid grid-cols-2 gap-x-4">
 						<div className="col-span-1 bg-white rounded-3xl py-4 px-7">
 							<PortfolioCard />	

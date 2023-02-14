@@ -2,7 +2,7 @@ import React from "react";
 import AppLayout from "../components/App/AppLayout";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "./api/auth/[...nextauth]";
-import Transactions from "../components/IncomeSpendings/Transactions";
+import Transactions from "../components/IncomeExpenses/Transactions";
 import { Input } from "@nextui-org/react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import DoughnutChart from "../components/Charts/DoughnutChart";
@@ -17,7 +17,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import Head from "next/head";
 
-const IncomeSpendings = () => {
+const IncomeExpenses = () => {
 	const allTransactions = useQuery(["getAllTransactions"], () => fetchAllTransactions());
 	const allIncomeTransactionData = useQuery(["getAllIncomeTransactionData"], () =>
 		fetchTransactionsTypeData("income")
@@ -113,7 +113,7 @@ const IncomeSpendings = () => {
 	);
 };
 
-export default IncomeSpendings;
+export default IncomeExpenses;
 
 export async function getServerSideProps(context: any) {
 	const session = await unstable_getServerSession(context.req, context.res, authOptions);
