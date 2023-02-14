@@ -31,10 +31,8 @@ const Holdings = () => {
 		clearTimeout(typingTimeout);
 		setTypingTimeout(
 			setTimeout(async () => {
-				console.log("User stopped typing");
 				const res = await searchStockQuote(e.target.value);
 				setBestMatches(res.results);
-				// console.log(res);
 			}, 1000)
 		);
 	};

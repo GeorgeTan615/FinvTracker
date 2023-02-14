@@ -30,7 +30,6 @@ const PortfolioCard = () => {
 				currDailyValue += investment.quantity * investment.curr.price;
 
 				if (investment.prev.price){
-					// console.log(investment.prev)
 					prevDailyValue += investment.quantity * investment.prev.price;
 				}
 
@@ -39,8 +38,6 @@ const PortfolioCard = () => {
 			setTotalGain(parseFloat((value - overallCost).toFixed(2)));
 			setTotalGainPercentage(parseFloat((((value - overallCost) / overallCost) * 100).toFixed(2)));
 			setDayGain(parseFloat((currDailyValue - prevDailyValue).toFixed(2)));
-			console.log(currDailyValue)
-			console.log(prevDailyValue)
 			setDayGainPercentage(
 				parseFloat((((currDailyValue - prevDailyValue) / prevDailyValue) * 100).toFixed(2))
 			);

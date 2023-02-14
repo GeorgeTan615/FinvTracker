@@ -49,7 +49,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		}
 	}
 	catch(err:any){
-		console.log(err.message)
 		res.status(500).json({ result: err.message });
 	}
 };
