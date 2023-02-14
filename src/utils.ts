@@ -217,7 +217,7 @@ export const getAllInvestmentProductData = async(latest:boolean = false) =>{
 
 export const uploadFile = async (file:File) => {
 	try{
-		const response = await fetch(`${baseUrl}/api/s3/uploadFile`, {
+		const response = await fetch(`${baseUrl}/api/s3/files`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -225,11 +225,8 @@ export const uploadFile = async (file:File) => {
 			body: JSON.stringify({ name: file.name, type: file.type}),
 		});
 	
-		console.log('HERE3')
-	
 		const data = await response.json();
 		const url = data.url;
-		console.log(url)
 	
 		await fetch(url, {
 			method: "PUT",
@@ -242,8 +239,6 @@ export const uploadFile = async (file:File) => {
 		return true
 	}
 	catch(err:any){
-		console.log('---------HER---------------')
-		console.log(err.message)
 		return false
 	}
 
