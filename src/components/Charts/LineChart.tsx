@@ -18,7 +18,6 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-//   Legend
 );
 
 const LineChart = ({
@@ -37,7 +36,6 @@ const LineChart = ({
 				label: "USD",
 				data: chartData,
 				borderColor:'#C36CEC'
-				// backgroundColor: color,
 			},
 		],
 	};
