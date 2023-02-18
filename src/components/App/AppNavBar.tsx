@@ -60,7 +60,7 @@ const AppNavBar = () => {
 				</Link>
 			</div>
 			<div className="flex items-center justify-end gap-3 justify-self-end text-lg font-semibold">
-				{isLightMode ? (
+				{/* {isLightMode ? (
 					<MdOutlineLightMode
 						className="cursor-pointer"
 						size={25}
@@ -72,7 +72,7 @@ const AppNavBar = () => {
 						size={25}
 						onClick={() => setIsLightMode(true)}
 					/>
-				)}
+				)} */}
 				<Profile />
 			</div>
 		</nav>

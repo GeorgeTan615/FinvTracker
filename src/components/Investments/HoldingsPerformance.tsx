@@ -7,7 +7,7 @@ interface Memo {
 	[key: string]: number
  }
 const HoldingsPerformance = () => {
-	const { data, isLoading } = useQuery("getHoldingsChartData", () =>
+	const { data } = useQuery("getHoldingsChartData", () =>
 		getAllInvestmentProductData()
 	);
 	// Labels will be each day
